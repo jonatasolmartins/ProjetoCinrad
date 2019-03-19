@@ -1,0 +1,244 @@
+﻿@{
+    ViewData["Title"] = "Pedidos Page";
+}
+
+<link href="~/css/pedidos_page.css" rel="stylesheet" />
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Pedidos</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li class="active">
+                <strong>Pedidos</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-18">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <input type="text" placeholder="Buscar pedido " class="input form-control">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn btn-white"> <i class="fa fa-search"></i> Buscar</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clients-list ">
+                        <span class="input-group-btn">
+                            <a data-toggle="modal" class="btn btn-primary" href="#modal-form">Novo</a>
+                        </span>
+
+                        <!-- MODAL -->
+
+                        <div id="modal-form" class="modal fade" aria-hidden="true" data-backdrop="false" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h3 class="m-t-none m-b">Editar Pedido</h3>
+
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div>
+
+                                                <form role="form">
+
+                                                    <div class="form-group">
+                                                        <label class="font-noraml">Produção</label>
+                                                        <div class="input-group">
+                                                            <select data-placeholder="Choose a Country..." class="chosen-select" style="width:350px;" tabindex="4">
+                                                                <option value="">Select</option>
+                                                                <option value="United States">Dipirona 13/11/2017 15h00</option>
+                                                                <option value="United States">Novalgina 13/11/2017 15h00</option>
+
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="font-noraml">Cliente</label>
+                                                        <div class="input-group">
+                                                            <select data-placeholder="Choose a Country..." class="chosen-select" style="width:350px;" tabindex="4">
+                                                                <option value="">Select</option>
+                                                                <option value="United States">Cliente 2</option>
+                                                                <option value="United States">Cliente 3</option>
+                                                                <option value="United States">Cliente 7</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="font-noraml">Apresentação</label>
+                                                        <div class="input-group">
+                                                            <select data-placeholder="Choose a Country..." class="chosen-select" style="width:350px;" tabindex="4">
+                                                                <option value="">Select</option>
+                                                                <option value="United States">5mg/ml Frasco</option>
+                                                                <option value="United States">15mg/ml Frasco</option>
+                                                                <option value="United States">25mg/ml Frasco</option>
+                                                                <option value="United States">35mg/ml Frasco</option>
+                                                                <option value="United States">45mg/ml Frasco</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="font-noraml">Unidade de Venda: Frasco</label>
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="font-noraml">Quantidade</label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" placeholder="Quantidade">
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="ibox collapsed">
+                                                        <div class="ibox-title">
+                                                            <h5>Informações do paciente</h5>
+                                                            <div class="ibox-tools">
+                                                                <a class="collapse-link">
+                                                                    <i class="fa fa-chevron-down"></i>
+                                                                </a>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="ibox-content" style="display: block;">
+
+                                                            <div class="form-group">
+                                                                <label class="font-noraml">Nome</label>
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control" placeholder="Quantidade">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label class="font-noraml">Peso</label>
+                                                                <div class="input-group">
+                                                                    <input type="number" class="form-control" placeholder="0,00 kg">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label class="font-noraml">Data e hora da aplicação</label>
+                                                                <div class="input-group">
+                                                                    <input type="datetime" class="form-control" placeholder="dd/mm/aaaa hh:mm">
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="form-group">
+                                                        <label class="font-noraml">Observação</label>
+                                                        <div class="input-group">
+                                                            <textarea class="form-control" placeholder=""></textarea>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-white" data-dismiss="modal">Fechar</button>
+                                                        <button type="button" class="btn btn-primary">Salvar</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+
+                                    <th>#</th>
+                                    <th>DATA</th>
+                                    <th>Cliente</th>
+                                    <th>Detalhes</th>
+
+                                    <th>Status</th>
+                                    <th>Status da Produção</th>
+                                    <th>Senha da Rotina</th>
+
+
+                                    <th colspan="4">Açoes</th>
+
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>5</td>
+                                    <td>10/11/2017</td>
+                                    <td>Instituto Central</td>
+
+                                    <td> bla bla bla </td>
+                                    <td><label class="rounded-pill">Aguardando Aprovação</label></td>
+                                    <td>Não Iniciada</td>
+                                    <td></td>
+                                    <td><a data-toggle="modal" href="#confirmRemoverModal" title="Cancelar"><h2><i class="fa fa-times "></i></h2></a></td>
+                                    <td><a data-toggle="modal" href="#confirmRemoverModal" title="Aprovar"><h2><i class="fa fa-thumbs-up "></i></h2></a></td>
+                                    <td><a data-toggle="modal" href="#confirmRemoverModal" title="Reprovar"><h2><i class="fa fa-thumbs-down "></i></h2></a></td>
+                                    <td><a data-toggle="modal" href="#modal-form" title="Editar"><h2><i class="fa fa-edit "></i></h2></a></td>
+                                </tr>
+
+                                <tr>
+                                    <td>4</td>
+                                    <td>09/11/2017</td>
+                                    <td>Instituto Central</td>
+
+                                    <td> bla bla bla </td>
+                                    <td>Aprovado</td>
+                                    <td>Finalizada</td>
+                                    <td>ADF3ab34!#</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/pedidos_page.js" asp-append-version="true">
+    $(document).ready(function () {
+        teste();
+        fnClickAddRow();
+    });
+
+</script>
