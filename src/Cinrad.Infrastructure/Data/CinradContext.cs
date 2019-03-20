@@ -1,4 +1,5 @@
 ﻿using Cinrad.Core.Entity;
+using Cinrad.Infrastructure.Map;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
@@ -8,7 +9,7 @@ namespace Cinrad.Infrastructure.Data
     {
         public CinradContext(DbContextOptions<CinradContext> options) : base(options)
         {
-
+            
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
@@ -19,29 +20,15 @@ namespace Cinrad.Infrastructure.Data
         public DbSet<AgendaProducao> AgendaProducoes  { get; set; }
         public DbSet<ApresentacaoProduto> ApresentacaoProdutos  { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Usuario>().ToTable("Usuario")
-                .HasOne<Cliente>(e => e.Cliente)                
-                .WithMany(e => e.Usuarios)                
-                .HasForeignKey(e => e.ClienteId)
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-
-            modelBuilder.Entity<Usuario>()
-                .HasOne<Transportadora>(e => e.Transportadora)
-                .WithMany(e => e.Usuarios)                
-                .HasForeignKey(e => e.TransportadoraId)
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-
-            modelBuilder.Entity<Cliente>().ToTable("Cliente");
-            modelBuilder.Entity<Transportadora>().ToTable("Transportadora");
-            modelBuilder.Entity<Pedido>().ToTable("Pedido");
-            modelBuilder.Entity<Produto>().ToTable("Produto");
-            modelBuilder.Entity<AgendaProducao>().ToTable("AgendaProducao");
-            modelBuilder.Entity<ApresentacaoProduto>().ToTable("ApresentacaoProduto");
-
+            modelBuilder.Entity<Usuario>(new UsuarioMap().Configure);
+            modelBuilder.Entity<Cliente>(new ClienteMap().Configure);
+            modelBuilder.Entity<Transportadora>(new TransportadoraMap().Configure);
+            modelBuilder.Entity<Pedido>(new PedidoMap().Configure);
+            modelBuilder.Entity<Produto>(new ProdutoMap().Configure);
+            modelBuilder.Entity<AgendaProducao>(new AgendaProducaoMap().Configure);
+            modelBuilder.Entity<ApresentacaoProduto>(new ApresentacaoProdutoMap().Configure);
         }
 
         public override int SaveChanges()
