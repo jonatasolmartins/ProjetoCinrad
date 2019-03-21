@@ -1,18 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Cinrad.Core.Interface;
+﻿using Cinrad.Core.Interface;
+using System;
 namespace Cinrad.Core.Entity
 {
     public class Usuario : Entity, IIsDeleted
     {
-        public Usuario(){}            
+        public Usuario(string nome, string email)
+        {
+            this.Nome = nome;
+            this.Email = email;
+            this.IsDeleted = false;
+        }            
         
-        public string Nome { get; set; }
-        public string Email { get; set; }
-        public string CPF { get; set; }
-        public string Celular { get; set; }
-        public string Telefone { get; set; }
+        protected Usuario(){}
+        public string Nome { get; private set; }
+        public string Email { get; private set; }
+        public string CPF { get; private set; }
+        public string Celular { get; private set; }
+        public string Telefone { get; private set; }
         public bool IsDeleted { get; set; }
         public Guid? ClienteId { get; set; }
         public Cliente Cliente { get; set; }

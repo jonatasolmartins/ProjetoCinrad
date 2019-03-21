@@ -13,5 +13,6 @@ namespace Cinrad.Core.Interface.Repository
         IEnumerable<TEntity> Buscar(Expression<Func<TEntity, bool>> predicado);
         void Remover(TEntity entity);
         void Remover(Guid id);
+        //void Save();
     }
 }

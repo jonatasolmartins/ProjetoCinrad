@@ -1,11 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Cinrad.Core.Entity
 {
     public class Produto : Entity
     {
+        public Produto()
+        {
+
+        }
         public Guid Codigo {get; set;}
         public string Nome { get; set; }
         public string Descrisao { get; set; }

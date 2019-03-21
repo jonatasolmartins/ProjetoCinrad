@@ -13,6 +13,7 @@ namespace Cinrad.Infrastructure.Map
 
             builder.HasKey(c => c.Id);
                 
+                
             builder.Property(c => c.Nome)                
                 .HasColumnName("Nome")
                 .HasMaxLength(30)               
@@ -40,11 +41,11 @@ namespace Cinrad.Infrastructure.Map
             
             builder.Property(c => c.IsDeleted)
                 .HasColumnName("Ativo")
-                .IsRequired(false);
+                .IsRequired();
             
             builder.HasOne<Cliente>(c => c.Cliente)
                     .WithMany(c => c.Usuarios)
-                    .HasForeignKey(c => c.ClienteId)
+                    .HasForeignKey(c => c.ClienteId)                    
                     .IsRequired(false)
                     .OnDelete(DeleteBehavior.ClientSetNull);                    
 

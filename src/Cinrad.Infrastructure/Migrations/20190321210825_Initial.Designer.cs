@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Cinrad.Infrastructure.Migrations.UserDb
+namespace Cinrad.Infrastructure.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20190319061928_Initial")]
+    [Migration("20190321210825_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

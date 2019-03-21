@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Cinrad.Infrastructure.CrossCutting.Ioc;
 using Cinrad.Infrastructure.Data;
 using Cinrad.Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Cinrad.UI.Web
 {
@@ -34,7 +31,6 @@ namespace Cinrad.UI.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
             
             services.AddDbContext<UserDbContext>(options =>
            options.UseSqlServer("Data Source=DESKTOP-PR797PU;Initial Catalog=Cinrad;Persist Security Info=True;User ID=sa;Password=123456"));
@@ -67,7 +63,20 @@ namespace Cinrad.UI.Web
                 options.SlidingExpiration = true;
             });
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Add Role",
+                    policy => policy.RequireClaim("Can add roles", "add.role"));
+                options.AddPolicy("Edit Role",
+                    policy => policy.RequireClaim("Can edit roles", "edit.role"));
+                options.AddPolicy("Delete Role",
+                    policy => policy.RequireClaim("Can delete roles", "delete.role"));
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            // .NET Native DI Abstraction
+            RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -96,6 +105,12 @@ namespace Cinrad.UI.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private static void RegisterServices(IServiceCollection services)
+        {
+            // Adding dependencies from another layers (isolated from Presentation)
+            NativeInjectorBootStrapper.RegisterServices(services);
         }
     }
 }

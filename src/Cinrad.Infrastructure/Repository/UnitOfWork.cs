@@ -1,14 +1,20 @@
+using Cinrad.Core.Interface.Repository;
 using Cinrad.Infrastructure.Data;
 using System;
 
 namespace Cinrad.Infrastructure.Repository
 {
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork : IUnitOfWork
     {
-        private CinradContext _context;
+        private readonly CinradContext _context;
         private readonly UsuarioRepository _usuarioRepository;
         private readonly ClienteRepository _clienteRepository;
         private readonly TransportadoraRepository _transportadoraRepository;
+
+        public UnitOfWork(CinradContext context)
+        {
+            _context = context;
+        }
 
         public UsuarioRepository UsuarioRepository
         {

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Cinrad.Core.Entity
+﻿namespace Cinrad.Core.Entity
 {
     public class Pedido : Entity
     {
+        public Pedido()
+        {
+
+        }
     }
 }

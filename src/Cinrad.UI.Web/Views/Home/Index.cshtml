@@ -1,8 +1,18 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+        @if (User.IsInRole("Admin") && User.Claims.Equals("Add Role"))
+        {
+            <a id="createRoleButton" asp-action="Pedido" asp-controller="Home" class="btn btn-primary">
+                <i class="glyphicon glyphicon-plus"></i> Esse cara pode ver ess botão porque tem  role "add"
+            </a>
+        }
+    </div>

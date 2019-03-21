@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Cinrad.Infrastructure.Migrations
+namespace Cinrad.Infrastructure.Migrations.Cinrad
 {
     public partial class Initial : Migration
     {
@@ -34,12 +34,12 @@ namespace Cinrad.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Codigo = table.Column<int>(nullable: false),
+                    codigo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Cnpj = table.Column<string>(nullable: true),
-                    RazaoSocial = table.Column<string>(nullable: true),
-                    NomeFantasia = table.Column<string>(nullable: true),
-                    Telefone = table.Column<string>(nullable: true),
-                    Site = table.Column<string>(nullable: true)
+                    RazaoSocial = table.Column<string>(maxLength: 100, nullable: false),
+                    NomeFantasia = table.Column<string>(maxLength: 100, nullable: true),
+                    Telefone = table.Column<string>(maxLength: 20, nullable: true),
+                    Site = table.Column<string>(maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -80,12 +80,12 @@ namespace Cinrad.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Codigo = table.Column<int>(nullable: false),
+                    codigo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Cnpj = table.Column<string>(nullable: true),
-                    RazaoSocial = table.Column<string>(nullable: true),
-                    NomeFantasia = table.Column<string>(nullable: true),
-                    Telefone = table.Column<string>(nullable: true),
-                    Site = table.Column<string>(nullable: true)
+                    RazaoSocial = table.Column<string>(maxLength: 100, nullable: false),
+                    NomeFantasia = table.Column<string>(maxLength: 100, nullable: true),
+                    Telefone = table.Column<string>(maxLength: 20, nullable: true),
+                    Site = table.Column<string>(maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -97,12 +97,12 @@ namespace Cinrad.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Nome = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    CPF = table.Column<string>(nullable: true),
-                    Celular = table.Column<string>(nullable: true),
-                    Telefone = table.Column<string>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
+                    Nome = table.Column<string>(maxLength: 30, nullable: false),
+                    Email = table.Column<string>(maxLength: 35, nullable: false),
+                    Cpf = table.Column<string>(maxLength: 11, nullable: false),
+                    Celular = table.Column<string>(maxLength: 9, nullable: true),
+                    Telefone = table.Column<string>(maxLength: 8, nullable: true),
+                    Ativo = table.Column<bool>(nullable: false),
                     ClienteId = table.Column<Guid>(nullable: true),
                     TransportadoraId = table.Column<Guid>(nullable: true)
                 },

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Cinrad.Infrastructure.Migrations.UserDb
+namespace Cinrad.Infrastructure.Migrations
 {
     public partial class Initial : Migration
     {

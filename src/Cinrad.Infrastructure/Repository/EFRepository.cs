@@ -61,5 +61,6 @@ namespace Cinrad.Infrastructure.Repository
             var entity = dbSet.Find(Id); 
             dbSet.Remove(entity);
         }
+               
     }
 }

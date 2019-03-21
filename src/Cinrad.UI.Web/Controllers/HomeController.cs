@@ -11,7 +11,7 @@ namespace Cinrad.UI.Web.Controllers
 {
     public class HomeController : Controller
     {
-        [Authorize]
+        [Authorize("Add Role")]
         public IActionResult Index()
         {
             return View();
@@ -22,6 +22,7 @@ namespace Cinrad.UI.Web.Controllers
             return View();
         }
 
+        [Authorize("Edit Role")]
         public IActionResult Pedidos()
         {
             return View();

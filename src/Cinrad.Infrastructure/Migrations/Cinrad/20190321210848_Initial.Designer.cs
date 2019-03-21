@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Cinrad.Infrastructure.Migrations
+namespace Cinrad.Infrastructure.Migrations.Cinrad
 {
     [DbContext(typeof(CinradContext))]
-    [Migration("20190319060723_Initial")]
+    [Migration("20190321210848_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,15 +48,26 @@ namespace Cinrad.Infrastructure.Migrations
 
                     b.Property<string>("Cnpj");
 
-                    b.Property<int>("Codigo");
+                    b.Property<Guid>("Codigo")
+                        .HasColumnName("codigo")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("NomeFantasia");
+                    b.Property<string>("NomeFantasia")
+                        .HasColumnName("NomeFantasia")
+                        .HasMaxLength(100);
 
-                    b.Property<string>("RazaoSocial");
+                    b.Property<string>("RazaoSocial")
+                        .IsRequired()
+                        .HasColumnName("RazaoSocial")
+                        .HasMaxLength(100);
 
-                    b.Property<string>("Site");
+                    b.Property<string>("Site")
+                        .HasColumnName("Site")
+                        .HasMaxLength(100);
 
-                    b.Property<string>("Telefone");
+                    b.Property<string>("Telefone")
+                        .HasColumnName("Telefone")
+                        .HasMaxLength(20);
 
                     b.HasKey("Id");
 
@@ -104,15 +115,26 @@ namespace Cinrad.Infrastructure.Migrations
 
                     b.Property<string>("Cnpj");
 
-                    b.Property<int>("Codigo");
+                    b.Property<Guid>("Codigo")
+                        .HasColumnName("codigo")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("NomeFantasia");
+                    b.Property<string>("NomeFantasia")
+                        .HasColumnName("NomeFantasia")
+                        .HasMaxLength(100);
 
-                    b.Property<string>("RazaoSocial");
+                    b.Property<string>("RazaoSocial")
+                        .IsRequired()
+                        .HasColumnName("RazaoSocial")
+                        .HasMaxLength(100);
 
-                    b.Property<string>("Site");
+                    b.Property<string>("Site")
+                        .HasColumnName("Site")
+                        .HasMaxLength(100);
 
-                    b.Property<string>("Telefone");
+                    b.Property<string>("Telefone")
+                        .HasColumnName("Telefone")
+                        .HasMaxLength(20);
 
                     b.HasKey("Id");
 
@@ -124,19 +146,33 @@ namespace Cinrad.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CPF");
+                    b.Property<string>("CPF")
+                        .IsRequired()
+                        .HasColumnName("Cpf")
+                        .HasMaxLength(11);
 
-                    b.Property<string>("Celular");
+                    b.Property<string>("Celular")
+                        .HasColumnName("Celular")
+                        .HasMaxLength(9);
 
                     b.Property<Guid?>("ClienteId");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnName("Email")
+                        .HasMaxLength(35);
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnName("Ativo");
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnName("Nome")
+                        .HasMaxLength(30);
 
-                    b.Property<string>("Telefone");
+                    b.Property<string>("Telefone")
+                        .HasColumnName("Telefone")
+                        .HasMaxLength(8);
 
                     b.Property<Guid?>("TransportadoraId");
 
