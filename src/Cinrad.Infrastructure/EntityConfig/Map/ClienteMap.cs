@@ -18,6 +18,11 @@ namespace Cinrad.Infrastructure.Map
                 .HasColumnType("uniqueidentifier")
                 .IsRequired();
 
+            builder.Property(c => c.Cnpj)
+               .HasColumnName("Cnpj")
+               .HasMaxLength(14)              
+               .IsRequired();
+
             builder.Property(c => c.NomeFantasia)
                 .HasColumnName("NomeFantasia")
                 .HasMaxLength(100)
