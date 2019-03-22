@@ -11,9 +11,9 @@ namespace Cinrad.Infrastructure.CrossCutting.Ioc
         {
             // Infra - Data 
 
-            //services.AddTransient<IUsuarioRepository, UsuarioRepository>();
-            //services.AddTransient<IClienteRepository, ClienteRepository>();
-            //services.AddTransient<ITransportadoraRepository, TransportadoraRepository>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+            services.AddTransient<IClienteRepository, ClienteRepository>();
+            services.AddTransient<ITransportadoraRepository, TransportadoraRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<CinradContext>();
