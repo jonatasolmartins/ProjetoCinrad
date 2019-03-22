@@ -34,7 +34,7 @@ namespace Cinrad.Infrastructure.CrossCutting.Identity
             //Criando um super usuário que pode interagir com qualquer parte do app
             ApplicationUser poweruser = new ApplicationUser
             {
-                UserName = Configuration.GetSection("AppSettings")["UserEmail"],
+                UserName = Configuration.GetSection("AppSettings")["UserName"], 
                 Email = Configuration.GetSection("AppSettings")["UserEmail"]
             };
             string userPassword = Configuration.GetSection("AppSettings")["UserPassword"];
