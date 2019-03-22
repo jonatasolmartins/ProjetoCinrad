@@ -30,7 +30,7 @@ namespace Cinrad.Infrastructure.CrossCutting.Identity
                 {
                     await RoleManager.CreateAsync(role);
                 }
-            }​            
+            }
             //Criando um super usuário que pode interagir com qualquer parte do app
             ApplicationUser poweruser = new ApplicationUser
             {
