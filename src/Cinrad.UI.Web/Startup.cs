@@ -18,7 +18,7 @@ namespace Cinrad.UI.Web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        }    
+        }
 
         public IConfiguration Configuration { get; }
 
@@ -30,13 +30,15 @@ namespace Cinrad.UI.Web
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
-            });            
-            
+            });
+
+            var connectionstring = Configuration.GetSection("ConenectionStrings")["DefaultConnection"];
+
             services.AddDbContext<UserDbContext>(options =>
-           options.UseSqlServer("Data Source=DESKTOP-PR797PU;Initial Catalog=Cinrad;Persist Security Info=True;User ID=sa;Password=123456"));
+           options.UseSqlServer(connectionstring));
 
             services.AddDbContext<CinradContext>(options =>
-            options.UseSqlServer("Data Source=DESKTOP-PR797PU;Initial Catalog=Cinrad;Persist Security Info=True;User ID=sa;Password=123456"));
+            options.UseSqlServer(connectionstring));
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<UserDbContext>()
@@ -47,12 +49,12 @@ namespace Cinrad.UI.Web
             {
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 8;
-                options.Password.RequiredUniqueChars = 6;
+                options.Password.RequiredUniqueChars = 2;
                 options.Password.RequireLowercase = true;
-                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = true;
             });
-           
+
             services.ConfigureApplicationCookie(options =>
             {
                 options.CookieHttpOnly = true;
@@ -61,17 +63,7 @@ namespace Cinrad.UI.Web
                 options.LogoutPath = "/Account/Logout";
                 options.AccessDeniedPath = "/Account/AccessDenied";
                 options.SlidingExpiration = true;
-            });
-
-            //services.AddAuthorization(options =>
-            //{
-            //    options.AddPolicy("Admin",
-            //        policy => policy.RequireClaim("Can add roles", "add.role"));
-            //    options.AddPolicy("Edit Role",
-            //        policy => policy.RequireClaim("Can edit roles", "edit.role"));
-            //    options.AddPolicy("Delete Role",
-            //        policy => policy.RequireClaim("Can delete roles", "delete.role"));               
-            //});
+            });            
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
