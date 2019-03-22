@@ -19,7 +19,7 @@ namespace Cinrad.UI.Web.Controllers
    
 
         [HttpGet]
-        [AllowAnonymous]
+        [AllowAnonymous]        
         public async Task<IActionResult> Login(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -28,7 +28,7 @@ namespace Cinrad.UI.Web.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost]       
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
@@ -57,6 +57,14 @@ namespace Cinrad.UI.Web.Controllers
             }
 
             return View(model);
+        }
+        
+
+        [HttpGet]        
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Account");
         }
 
         public IActionResult RedirectToLocal(string returnUrl)
