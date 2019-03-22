@@ -18,7 +18,7 @@ namespace Cinrad.UI.Web.Controllers
             return View();
         }
 
-        [Authorize("RequireAdminRole")]
+        [Authorize("RequireSuperUserRole")]
         public IActionResult Pedidos()
         {
             return View();
