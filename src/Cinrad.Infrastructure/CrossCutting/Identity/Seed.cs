@@ -11,39 +11,37 @@ namespace Cinrad.Infrastructure.CrossCutting.Identity
         public static async Task CreateRoles(IServiceCollection service, IConfiguration Configuration)
         {
             //Adicionando roles customizadas
-            var RoleManager = service.BuildServiceProvider().GetRequiredService<RoleManager<ApplicationRole>>();
-            var UserManager = service.BuildServiceProvider().GetRequiredService<UserManager<ApplicationUser>>();
+            RoleManager<ApplicationRole> RoleManager = service.BuildServiceProvider().GetRequiredService<RoleManager<ApplicationRole>>();
+            UserManager<ApplicationUser> UserManager = service.BuildServiceProvider().GetRequiredService<UserManager<ApplicationUser>>();
 
-            var roles = new List<ApplicationRole>() {
+            List<ApplicationRole> roles = new List<ApplicationRole>(){
                 new ApplicationRole("Admin","Usuário Administrador"),
                 new ApplicationRole("Cliente","Usuário Cliente"),
                 new ApplicationRole("Transportador","Usuário Transportadora"),
                 new ApplicationRole("Supervisor","Usuário Supervisor"),
                 new ApplicationRole("PowerUser","Super Powerfull User")
             };
-            IdentityResult roleResult;​
 
-            foreach (var role in roles)
+            foreach (ApplicationRole role in roles)
             {
-                // Criando as roles e persistindo no banco
-                var roleExist = await RoleManager.RoleExistsAsync(role.Name);
+                //Criando as roles e persistindo no banco
+                bool roleExist = await RoleManager.RoleExistsAsync(role.Name);
                 if (!roleExist)
                 {
-                    roleResult = await RoleManager.CreateAsync(role);
+                    await RoleManager.CreateAsync(role);
                 }
-            }​
-            // Criando um super usuário que pode interagir com qualquer parte do app
-            var poweruser = new ApplicationUser
+            }​            
+            //Criando um super usuário que pode interagir com qualquer parte do app
+            ApplicationUser poweruser = new ApplicationUser
             {
                 UserName = Configuration.GetSection("AppSettings")["UserEmail"],
                 Email = Configuration.GetSection("AppSettings")["UserEmail"]
             };
-​
             string userPassword = Configuration.GetSection("AppSettings")["UserPassword"];
-            var user = await UserManager.FindByEmailAsync(Configuration.GetSection("AppSettings")["UserEmail"]);
+            ApplicationUser user = await UserManager.FindByEmailAsync(Configuration.GetSection("AppSettings")["UserEmail"]);
             if (user == null)
             {
-                var createPowerUser = await UserManager.CreateAsync(poweruser, userPassword);
+                IdentityResult createPowerUser = await UserManager.CreateAsync(poweruser, userPassword);
                 if (createPowerUser.Succeeded)
                 {
                     // Adicionando a role PowerUser para o novo usuário 
