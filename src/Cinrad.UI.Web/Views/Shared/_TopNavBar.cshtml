@@ -11,9 +11,10 @@
                 </div>
             </form>
         </div>
-        @if (SigninManager.IsSignedIn(User))
-        {
-            <ul class="nav navbar-top-links navbar-right">
+        <ul class="nav navbar-top-links navbar-right">
+            @if (SigninManager.IsSignedIn(User))
+            {
+
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" style=" color: white" data-toggle="dropdown" href="#" t="#">
                         <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
@@ -57,22 +58,20 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">@UserManager.GetUserName(User)</a>
+                    <a asp-area="" asp-controller="Home" asp-action="#">@UserManager.GetUserName(User)</a>
                 </li>
                 <li>
                     <a asp-area="" asp-controller="Account" asp-action="Logout"><i class="fa fa-sign-out"></i> <span class="nav-label">Sair</span></a>
                 </li>
-            </ul>
-        }
-        else
-        {
-            <ul>
+            }
+            else
+            {
+
                 <li>
                     <a asp-area="" asp-controller="Account" asp-action="Login"><i class="fa fa-sign-in"></i> <span class="nav-label">Entrar</span></a>
                 </li>
-
-            </ul>
-        }
+            }
+        </ul>
 
     </nav>
 </div>
