@@ -1,6 +1,6 @@
-﻿using Cinrad.Infrastructure.CrossCutting.Ioc;
+﻿using Cinrad.Infrastructure.CrossCutting.Identity;
+using Cinrad.Infrastructure.CrossCutting.Ioc;
 using Cinrad.Infrastructure.Data;
-using Cinrad.Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -30,7 +30,7 @@ namespace Cinrad.UI.Web
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            });            
             
             services.AddDbContext<UserDbContext>(options =>
            options.UseSqlServer("Data Source=DESKTOP-PR797PU;Initial Catalog=Cinrad;Persist Security Info=True;User ID=sa;Password=123456"));
@@ -38,7 +38,7 @@ namespace Cinrad.UI.Web
             services.AddDbContext<CinradContext>(options =>
             options.UseSqlServer("Data Source=DESKTOP-PR797PU;Initial Catalog=Cinrad;Persist Security Info=True;User ID=sa;Password=123456"));
 
-            services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<UserDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -63,17 +63,26 @@ namespace Cinrad.UI.Web
                 options.SlidingExpiration = true;
             });
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Add Role",
-                    policy => policy.RequireClaim("Can add roles", "add.role"));
-                options.AddPolicy("Edit Role",
-                    policy => policy.RequireClaim("Can edit roles", "edit.role"));
-                options.AddPolicy("Delete Role",
-                    policy => policy.RequireClaim("Can delete roles", "delete.role"));
-            });
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("Admin",
+            //        policy => policy.RequireClaim("Can add roles", "add.role"));
+            //    options.AddPolicy("Edit Role",
+            //        policy => policy.RequireClaim("Can edit roles", "edit.role"));
+            //    options.AddPolicy("Delete Role",
+            //        policy => policy.RequireClaim("Can delete roles", "delete.role"));               
+            //});
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireSuperUserRole", policy => policy.RequireRole("PowerUser"));
+                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+            });
+
+            // Roles e super admin
+            RegisterRolesUser(services, Configuration);
 
             // .NET Native DI Abstraction
             RegisterServices(services);
@@ -111,6 +120,11 @@ namespace Cinrad.UI.Web
         {
             // Adding dependencies from another layers (isolated from Presentation)
             NativeInjectorBootStrapper.RegisterServices(services);
+        }
+
+        private static void RegisterRolesUser(IServiceCollection services, IConfiguration configuration)
+        {
+            Seed.CreateRoles(services, configuration).GetAwaiter();
         }
     }
 }

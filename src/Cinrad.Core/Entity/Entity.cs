@@ -4,6 +4,11 @@ namespace Cinrad.Core.Entity
 {
     public abstract class Entity
     {
+        public Entity()
+        {
+            Id = new Guid();
+        }
+        
         public Guid Id { get; protected set; }
 
         public override bool Equals(object obj)

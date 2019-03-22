@@ -9,7 +9,6 @@ namespace Cinrad.Infrastructure.CrossCutting.Ioc
     {
         public static void RegisterServices(IServiceCollection services)
         {
-
             // Infra - Data 
 
             //services.AddTransient<IUsuarioRepository, UsuarioRepository>();

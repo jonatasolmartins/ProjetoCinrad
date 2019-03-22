@@ -6,9 +6,9 @@ namespace Cinrad.Core.Entity
     {
         public Usuario(string nome, string email)
         {
-            this.Nome = nome;
-            this.Email = email;
-            this.IsDeleted = false;
+            Nome = nome;
+            Email = email;
+            IsDeleted = false;
         }            
         
         protected Usuario(){}
