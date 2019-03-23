@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Cinrad.UI.Web.Models.HomeViewsModels
+namespace Cinrad.Service.ViewModels
 {
     public class TransportadoraViewModel
     {

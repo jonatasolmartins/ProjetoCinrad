@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28714.193
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1- UI", "1- UI", "{80848BE9-272C-48E9-86D5-2342CFDDD444}"
 EndProject
@@ -14,6 +14,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinrad.Infrastructure", "src\Cinrad.Infrastructure\Cinrad.Infrastructure.csproj", "{3D044AEF-2A14-4F90-B61F-1E41D7DBAE22}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinrad.UI.Web", "src\Cinrad.UI.Web\Cinrad.UI.Web.csproj", "{1AB16427-EDE2-4F4E-B32D-005BF8356ACE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Service", "4 - Service", "{2B7FF647-8336-4916-9724-D2B91F8993C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinrad.Service", "src\Cinrad.Service\Cinrad.Service.csproj", "{E5BBC078-42F0-4944-A93A-63F2AD67B5FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,10 @@ Global
 		{1AB16427-EDE2-4F4E-B32D-005BF8356ACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AB16427-EDE2-4F4E-B32D-005BF8356ACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AB16427-EDE2-4F4E-B32D-005BF8356ACE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5BBC078-42F0-4944-A93A-63F2AD67B5FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5BBC078-42F0-4944-A93A-63F2AD67B5FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5BBC078-42F0-4944-A93A-63F2AD67B5FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5BBC078-42F0-4944-A93A-63F2AD67B5FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +49,7 @@ Global
 		{8E958084-412E-4A39-9E25-8D89A9F3BEC3} = {A50A2CA1-2737-45E5-B17F-EDEC9EA554E0}
 		{3D044AEF-2A14-4F90-B61F-1E41D7DBAE22} = {654D208F-C210-4189-A50A-0B7BDBFFE5A8}
 		{1AB16427-EDE2-4F4E-B32D-005BF8356ACE} = {80848BE9-272C-48E9-86D5-2342CFDDD444}
+		{E5BBC078-42F0-4944-A93A-63F2AD67B5FE} = {2B7FF647-8336-4916-9724-D2B91F8993C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3C99562B-9E08-414F-BA4B-ADA491B5E5F2}

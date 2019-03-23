@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Cinrad.UI.Web.Models.HomeViewsModels
+namespace Cinrad.Service.ViewModels
 {
     public class UsuarioViewModel
     {
@@ -19,11 +19,11 @@ namespace Cinrad.UI.Web.Models.HomeViewsModels
         [Display(Name = "CPF")]
         [MaxLength(11)]
         public string CPF { get; private set; }
-       
+
         [Display(Name = "Celular")]
         [MaxLength(9)]
         public string Celular { get; private set; }
-        
+
         [Display(Name = "Telefone")]
         [MaxLength(8)]
         public string Telefone { get; private set; }

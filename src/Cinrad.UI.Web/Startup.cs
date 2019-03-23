@@ -1,6 +1,9 @@
 ﻿using Cinrad.Infrastructure.CrossCutting.Identity;
 using Cinrad.Infrastructure.CrossCutting.Ioc;
 using Cinrad.Infrastructure.Data;
+using Cinrad.Service.Interface;
+using Cinrad.Service.Services;
+using Cinrad.UI.Web.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -63,8 +66,12 @@ namespace Cinrad.UI.Web
                 options.LogoutPath = "/Account/Logout";
                 options.AccessDeniedPath = "/Account/AccessDenied";
                 options.SlidingExpiration = true;
-            });            
+            });
 
+
+            services.AddTransient<IService, Service.Services.Service>();
+            services.AddTransient<IUsuarioService, UsuarioService>();
+            services.AddAutoMapperSetup();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddAuthorization(options =>

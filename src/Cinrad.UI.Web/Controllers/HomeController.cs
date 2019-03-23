@@ -1,7 +1,7 @@
 ﻿using Cinrad.Infrastructure.CrossCutting.Identity;
-using Cinrad.Infrastructure.Repository;
+using Cinrad.Service.Interface;
+using Cinrad.Service.ViewModels;
 using Cinrad.UI.Web.Models;
-using Cinrad.UI.Web.Models.HomeViewsModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +13,12 @@ namespace Cinrad.UI.Web.Controllers
     public class HomeController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        //private readonly UnitOfWork _unitOfWork;
+        private readonly IService _service;
 
-        public HomeController(UserManager<ApplicationUser> userManager ) //UnitOfWork unitOfWork
+        public HomeController(UserManager<ApplicationUser> userManager, IService service)
         {
             _userManager = userManager;
-            //_unitOfWork = unitOfWork;
+            _service = service;
         }
 
         [Authorize("RequireSuperUserRole")]       
@@ -28,28 +28,28 @@ namespace Cinrad.UI.Web.Controllers
         }
 
 
-        [Authorize("RequireSuperUserRole")]       
-        public async Task<IActionResult> RegistrarUsuario(UsuarioViewModel model, string returnUrl = null)
+        [Authorize("RequireSuperUserRole")]
+        public IActionResult RegistrarUsuario(UsuarioViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                //_unitOfWork.UsuarioRepository.Adicionar(model);
-                var user = await _userManager.FindByEmailAsync("jonatas@jom.io.com");
+                model = _service.UsuarioService.Adicionar(model);
+               
             }
 
             return View(model);
         }
-              
-        
+
+
         [Authorize("RequireSuperUserRole")]        
         public async Task<IActionResult> RegistrarCliente(ClienteViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                //await _unitOfWork.ClienteRepository.Adicionar(model); 
-                var user = await _userManager.FindByEmailAsync("jonatas@jom.io.com");                
+                
+                await _userManager.FindByEmailAsync("jonatas@jom.io.com");                
 
             }
 
@@ -63,8 +63,8 @@ namespace Cinrad.UI.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                //await _unitOfWork.TransportadoraRepository.Adicionar(model);
-                var user = await _userManager.FindByEmailAsync("jonatas@jom.io.com");               
+                
+                 await _userManager.FindByEmailAsync("jonatas@jom.io.com");               
             }
 
             return View(model);
@@ -72,9 +72,15 @@ namespace Cinrad.UI.Web.Controllers
 
        
         [Authorize("RequireSuperUserRole")]
-        public IActionResult Pedidos()
+        public async Task<IActionResult> Pedidos(PedidoViewModel model, string returnUrl = null)
         {
-            return View();
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+                await _userManager.FindByEmailAsync("jonatas@jom.io.com");
+            }
+
+            return View(model);
         }
 
 
@@ -88,6 +94,15 @@ namespace Cinrad.UI.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        #region partial
+
+        public ActionResult ResgistarUsuarioModal()
+        {
+            return PartialView();
+        }
+
+        #endregion
 
     }
 }

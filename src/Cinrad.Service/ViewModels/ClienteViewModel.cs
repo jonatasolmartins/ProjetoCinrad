@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Cinrad.UI.Web.Models.HomeViewsModels
+namespace Cinrad.Service.ViewModels
 {
     public class ClienteViewModel
     {
         [Required]
-        [Display(Name ="Código")]
+        [Display(Name = "Código")]
         [MaxLength(50)]
         public Guid? Codigo { get; set; }
 
@@ -19,12 +19,12 @@ namespace Cinrad.UI.Web.Models.HomeViewsModels
         [Display(Name = "Razão Social")]
         [MaxLength(100)]
         public string RazaoSocial { get; set; }
-        
-        [Display(Name ="Nome Fantasia")]
+
+        [Display(Name = "Nome Fantasia")]
         [MaxLength(100)]
         public string NomeFantasia { get; set; }
 
-        [Display(Name ="Telefone Corporativo")]
+        [Display(Name = "Telefone Corporativo")]
         [MaxLength(20)]
         public string Telefone { get; set; }
 

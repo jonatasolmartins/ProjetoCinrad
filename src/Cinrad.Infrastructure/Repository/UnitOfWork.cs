@@ -1,4 +1,3 @@
-using Cinrad.Core.Interface.Repository;
 using Cinrad.Infrastructure.Data;
 using System;
 
@@ -41,8 +40,8 @@ namespace Cinrad.Infrastructure.Repository
         }
 
         public void Save()
-        {         
-           _context.SaveChanges();
+        {
+            _context.SaveChanges();
         }
 
         private bool disposed = false;
