@@ -4,6 +4,7 @@ using Cinrad.Infrastructure.Repository;
 using Cinrad.Service.Interface;
 using Cinrad.Service.Validators;
 using Cinrad.Service.ViewModels;
+using System.Collections.Generic;
 
 namespace Cinrad.Service.Services
 {
@@ -41,6 +42,11 @@ namespace Cinrad.Service.Services
             var result = new UsuarioValidator().Validate(user);
             if (result.IsValid)
                 _unitOfWork.UsuarioRepository.Remover(user);
+        }
+
+        public IList<UsuarioViewModel> ObterTodos()
+        {
+            return _mapper.Map<List<UsuarioViewModel>>(_unitOfWork.UsuarioRepository.ObterTodos());
         }
 
 

@@ -27,21 +27,7 @@ namespace Cinrad.UI.Web.Controllers
             return View();
         }
 
-
-        [Authorize("RequireSuperUserRole")]
-        public IActionResult RegistrarUsuario(UsuarioViewModel model, string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
-            {
-                model = _service.UsuarioService.Adicionar(model);
-               
-            }
-
-            return View(model);
-        }
-
-
+              
         [Authorize("RequireSuperUserRole")]        
         public async Task<IActionResult> RegistrarCliente(ClienteViewModel model, string returnUrl = null)
         {
@@ -97,7 +83,7 @@ namespace Cinrad.UI.Web.Controllers
 
         #region partial
 
-        public ActionResult ResgistarUsuarioModal()
+        public ActionResult UsuarioModal()
         {
             return PartialView();
         }

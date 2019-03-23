@@ -19,7 +19,8 @@ namespace Cinrad.Infrastructure.CrossCutting.Identity
                 new ApplicationRole("Cliente","Usuário Cliente"),
                 new ApplicationRole("Transportador","Usuário Transportadora"),
                 new ApplicationRole("Supervisor","Usuário Supervisor"),
-                new ApplicationRole("PowerUser","Super Powerfull User")
+                new ApplicationRole("PowerUser","Super Powerfull User"),
+                new ApplicationRole("Diretor", "Usuário Diretor")
             };
 
             foreach (ApplicationRole role in roles)
