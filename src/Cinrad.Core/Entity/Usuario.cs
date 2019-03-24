@@ -12,6 +12,12 @@ namespace Cinrad.Core.Entity
         }            
         
         protected Usuario(){}
+
+        public void SetId(Guid id)
+        {
+            Id = id;
+        }
+
         public string Nome { get; private set; }
         public string Email { get; private set; }
         public string CPF { get; private set; }

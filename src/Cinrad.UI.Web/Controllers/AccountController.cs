@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Cinrad.UI.Web.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly SignInManager<ApplicationUser> _signInManager;       
 

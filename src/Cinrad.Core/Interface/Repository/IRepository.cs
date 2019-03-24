@@ -6,7 +6,7 @@ namespace Cinrad.Core.Interface.Repository
 {
     public interface IRepository<TEntity> where TEntity: class
     {
-        TEntity Adicionar(TEntity entity);
+        void Adicionar(TEntity entity);
         void Atualizar(TEntity entity);
         IEnumerable<TEntity> ObterTodos();
         TEntity ObterPorId(Guid id);

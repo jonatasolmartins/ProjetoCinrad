@@ -19,10 +19,9 @@ namespace Cinrad.Infrastructure.Repository
             dbSet = _cinradContext.Set<TEntity>();
         }
 
-        public TEntity Adicionar(TEntity entity)
+        public void Adicionar(TEntity entity)
         {
             dbSet.Add(entity);            
-            return entity;
         }
 
         public void Atualizar(TEntity entity)

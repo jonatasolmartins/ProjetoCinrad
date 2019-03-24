@@ -1,23 +1,35 @@
 ﻿using Cinrad.Service.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace Cinrad.UI.Web.Controllers
 {
-    [Authorize("RequireSuperUserRole")]
-    public class UsuarioController : BaseController
+    public class TransportadorController : BaseController
     {
 
         [HttpGet]
+        [ValidateAntiForgeryToken]
         public IActionResult Index()
         {
-            ViewBag.Usuarios = Service.UsuarioService.ObterTodos();
+            ViewBag.Transportadoras = Service.TransportadorService.ObterTodos();
             return View();
         }
 
-        // GET: Usuario/Details/5
+        // GET: Transportador/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Registrar(TransportadoraViewModel transportadora)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = Service.TransportadorService.Adicionar(transportadora);
+                if (result)
+                    return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Transportador/Details/5
         [HttpGet]
         [ValidateAntiForgeryToken]
         public IActionResult Details(int id)
@@ -25,21 +37,7 @@ namespace Cinrad.UI.Web.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Registrar(UsuarioViewModel usuario)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await Service.UsuarioService.Adicionar(usuario);
-                if (result)
-                    return RedirectToAction(nameof(Index));
-            }
-
-            return RedirectToAction(nameof(Index));
-        }
-
-        // POST: Usuario/Create
+        // POST: Transportador/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(IFormCollection collection)
@@ -56,13 +54,15 @@ namespace Cinrad.UI.Web.Controllers
             }
         }
 
-        // GET: Usuario/Edit/5
+        // GET: Transportador/Edit/5
+        [HttpGet]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Usuario/Edit/5
+        // POST: Transportador/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, IFormCollection collection)
@@ -79,13 +79,15 @@ namespace Cinrad.UI.Web.Controllers
             }
         }
 
-        // GET: Usuario/Delete/5
+        // GET: Transportador/Delete/5
+        [HttpDelete]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Usuario/Delete/5
+        // POST: Transportador/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id, IFormCollection collection)
@@ -102,8 +104,11 @@ namespace Cinrad.UI.Web.Controllers
             }
         }
 
+
         #region Partial
-        public ActionResult UsuarioModal()
+
+        [HttpGet]
+        public IActionResult TransportadorModal()
         {
             return PartialView();
         }

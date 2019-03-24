@@ -6,23 +6,26 @@ namespace Cinrad.Service.Services
 {
     public class Service : IService
     {
-        private readonly IUsuarioService _usuarioService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IUsuarioService _usuarioService;
+        private readonly IClienteService _clienteService;
+        private readonly ITransportadorService _transportadorService;
 
-        public Service(IUnitOfWork unitOfWork, IMapper mapper, IUsuarioService usuarioService)
+
+        public Service(IUnitOfWork unitOfWork, IMapper mapper, IUsuarioService usuarioService, IClienteService clienteService, ITransportadorService transportadorService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _usuarioService = usuarioService;
+            _clienteService = clienteService;
+            _transportadorService = transportadorService;
         }
 
-        public IUsuarioService UsuarioService
-        {
-            get
-            {
-                return _usuarioService ?? new UsuarioService(_unitOfWork, _mapper);
-            }
-        }
+        public IUsuarioService UsuarioService => _usuarioService;
+
+        public IClienteService ClienteService => _clienteService;
+
+        public ITransportadorService TransportadorService => _transportadorService;
     }
 }

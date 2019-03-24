@@ -1,4 +1,6 @@
 ﻿using Cinrad.Core.Interface.Repository;
+using Cinrad.Infrastructure.CrossCutting.Identity;
+using Cinrad.Infrastructure.CrossCutting.Identity.Interface;
 using Cinrad.Infrastructure.Data;
 using Cinrad.Infrastructure.Repository;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +16,8 @@ namespace Cinrad.Infrastructure.CrossCutting.Ioc
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddTransient<IClienteRepository, ClienteRepository>();
             services.AddTransient<ITransportadoraRepository, TransportadoraRepository>();
+
+            services.AddScoped<IIdenityRepository, IdentityRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<CinradContext>();

@@ -3,5 +3,7 @@
     public interface IService
     {
         IUsuarioService UsuarioService { get; }
+        IClienteService ClienteService { get; }
+        ITransportadorService TransportadorService { get; }
     }
 }

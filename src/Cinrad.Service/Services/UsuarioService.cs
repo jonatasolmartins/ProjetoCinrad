@@ -1,10 +1,14 @@
 ﻿using AutoMapper;
 using Cinrad.Core.Entity;
+using Cinrad.Infrastructure.CrossCutting.Identity;
+using Cinrad.Infrastructure.CrossCutting.Identity.Interface;
 using Cinrad.Infrastructure.Repository;
 using Cinrad.Service.Interface;
 using Cinrad.Service.Validators;
 using Cinrad.Service.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Cinrad.Service.Services
 {
@@ -12,20 +16,32 @@ namespace Cinrad.Service.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public UsuarioService(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IIdenityRepository _identityRepository;
+        public UsuarioService(IUnitOfWork unitOfWork, IMapper mapper, IIdenityRepository identityRepository)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _identityRepository = identityRepository;
         }
 
-        public UsuarioViewModel Adicionar(UsuarioViewModel usuario)
+        public  async Task<bool> Adicionar(UsuarioViewModel usuario)
         {
+            //Validando o Usuário
             var user = _mapper.Map<Usuario>(usuario);
             var result = new UsuarioValidator().Validate(user);
             if (!result.IsValid)
-                return null;
+                return false;
+           
+            //Criando Usuário na tabela Identity 
+            var userId = await _identityRepository.CreateAsync(_mapper.Map<ApplicationUser>(usuario));
+            if (userId == Guid.Empty)
+                return false;
             
-            return _mapper.Map<UsuarioViewModel>(_unitOfWork.UsuarioRepository.Adicionar(user));
+            user.SetId(userId);
+            //Criando Usuario na Tabela do sistema
+            _unitOfWork.UsuarioRepository.Adicionar(user);
+
+            return _unitOfWork.Save() > 0;
         }
 
         public void Atualizar(UsuarioViewModel usuario)

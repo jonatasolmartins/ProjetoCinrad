@@ -1,27 +1,17 @@
-﻿using Cinrad.Infrastructure.CrossCutting.Identity;
-using Cinrad.Service.Interface;
-using Cinrad.Service.ViewModels;
+﻿using Cinrad.Service.ViewModels;
 using Cinrad.UI.Web.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Cinrad.UI.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IService _service;
 
-        public HomeController(UserManager<ApplicationUser> userManager, IService service)
-        {
-            _userManager = userManager;
-            _service = service;
-        }
 
-        [Authorize("RequireSuperUserRole")]       
+        [Authorize("RequireSuperUserRole")]
         public IActionResult Index()
         {
             return View();
@@ -34,8 +24,8 @@ namespace Cinrad.UI.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                
-                await _userManager.FindByEmailAsync("jonatas@jom.io.com");                
+
+                //await Service.UsuarioService.Adicionar(model);            
 
             }
 
@@ -48,9 +38,8 @@ namespace Cinrad.UI.Web.Controllers
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
-            {
+            {               
                 
-                 await _userManager.FindByEmailAsync("jonatas@jom.io.com");               
             }
 
             return View(model);
@@ -62,8 +51,7 @@ namespace Cinrad.UI.Web.Controllers
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
-            {
-                await _userManager.FindByEmailAsync("jonatas@jom.io.com");
+            {                
             }
 
             return View(model);
@@ -81,12 +69,7 @@ namespace Cinrad.UI.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        #region partial
-
-        public ActionResult UsuarioModal()
-        {
-            return PartialView();
-        }
+        #region partial        
 
         #endregion
 

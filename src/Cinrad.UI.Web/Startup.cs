@@ -1,8 +1,7 @@
 ﻿using Cinrad.Infrastructure.CrossCutting.Identity;
 using Cinrad.Infrastructure.CrossCutting.Ioc;
 using Cinrad.Infrastructure.Data;
-using Cinrad.Service.Interface;
-using Cinrad.Service.Services;
+using Cinrad.Service.Ioc;
 using Cinrad.UI.Web.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -52,7 +51,7 @@ namespace Cinrad.UI.Web
             {
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 8;
-                options.Password.RequiredUniqueChars = 2;
+                options.Password.RequiredUniqueChars = 4;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = true;
@@ -67,10 +66,7 @@ namespace Cinrad.UI.Web
                 options.AccessDeniedPath = "/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
-
-
-            services.AddTransient<IService, Service.Services.Service>();
-            services.AddTransient<IUsuarioService, UsuarioService>();
+            
             services.AddAutoMapperSetup();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -119,6 +115,7 @@ namespace Cinrad.UI.Web
         {
             // Adding dependencies from another layers (isolated from Presentation)
             NativeInjectorBootStrapper.RegisterServices(services);
+            InjectorBootStrapper.RegisterServices(services);
         }
 
         private static void RegisterRolesUser(IServiceCollection services, IConfiguration configuration)

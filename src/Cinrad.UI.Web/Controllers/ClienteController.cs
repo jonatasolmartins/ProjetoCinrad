@@ -2,22 +2,20 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace Cinrad.UI.Web.Controllers
 {
     [Authorize("RequireSuperUserRole")]
-    public class UsuarioController : BaseController
+    public class ClienteController : BaseController
     {
-
-        [HttpGet]
+        // GET: Cliente
         public IActionResult Index()
         {
-            ViewBag.Usuarios = Service.UsuarioService.ObterTodos();
+            ViewBag.Clientes = Service.ClienteService.ObterTodos();
             return View();
         }
 
-        // GET: Usuario/Details/5
+        // GET: Cliente/Details/5
         [HttpGet]
         [ValidateAntiForgeryToken]
         public IActionResult Details(int id)
@@ -25,21 +23,21 @@ namespace Cinrad.UI.Web.Controllers
             return View();
         }
 
+        // GET: Cliente/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Registrar(UsuarioViewModel usuario)
+        public IActionResult Registrar(ClienteViewModel cliente)
         {
             if (ModelState.IsValid)
             {
-                var result = await Service.UsuarioService.Adicionar(usuario);
+                var result = Service.ClienteService.Adicionar(cliente);
                 if (result)
                     return RedirectToAction(nameof(Index));
             }
-
             return RedirectToAction(nameof(Index));
         }
 
-        // POST: Usuario/Create
+        // POST: Cliente/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(IFormCollection collection)
@@ -56,13 +54,15 @@ namespace Cinrad.UI.Web.Controllers
             }
         }
 
-        // GET: Usuario/Edit/5
+        // GET: Cliente/Edit/5
+        [HttpGet]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Usuario/Edit/5
+        // POST: Cliente/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, IFormCollection collection)
@@ -79,13 +79,15 @@ namespace Cinrad.UI.Web.Controllers
             }
         }
 
-        // GET: Usuario/Delete/5
+        // GET: Cliente/Delete/5
+        [HttpGet]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Usuario/Delete/5
+        // POST: Cliente/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id, IFormCollection collection)
@@ -103,7 +105,7 @@ namespace Cinrad.UI.Web.Controllers
         }
 
         #region Partial
-        public ActionResult UsuarioModal()
+        public IActionResult ClienteModal()
         {
             return PartialView();
         }

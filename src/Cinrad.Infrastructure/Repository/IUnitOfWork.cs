@@ -7,6 +7,6 @@
         UsuarioRepository UsuarioRepository { get; }
 
         void Dispose();
-        void Save();
+        int Save();
     }
 }
