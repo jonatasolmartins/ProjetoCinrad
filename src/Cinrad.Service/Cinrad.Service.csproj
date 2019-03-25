@@ -435,6 +435,7 @@
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
+    <Compile Include="Enums\PerfilEnum.cs" />
     <Compile Include="Interface\IClienteService.cs" />
     <Compile Include="Interface\IService.cs" />
     <Compile Include="Interface\ITransportadorService.cs" />

@@ -1,7 +1,8 @@
 ﻿using Cinrad.Service.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Threading.Tasks;
 
 namespace Cinrad.UI.Web.Controllers
@@ -17,94 +18,70 @@ namespace Cinrad.UI.Web.Controllers
             return View();
         }
 
-        // GET: Usuario/Details/5
-        [HttpGet]
-        [ValidateAntiForgeryToken]
-        public IActionResult Details(int id)
-        {
-            return View();
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Registrar(UsuarioViewModel usuario)
+        public async Task<IActionResult> Registrar(UsuarioViewModel usuario, int perfil)
         {
             if (ModelState.IsValid)
             {
-                var result = await Service.UsuarioService.Adicionar(usuario);
+                var result = await Service.UsuarioService.Adicionar(usuario, perfil);
                 if (result)
                     return RedirectToAction(nameof(Index));
             }
 
-            return RedirectToAction(nameof(Index));
+            ModelState.AddModelError(string.Empty, "Tentativa de cadastro falhou!");
+
+            return View(usuario);
         }
 
-        // POST: Usuario/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
+        [HttpGet]
+        public IActionResult Editar(Guid id)
+        {
+            var user = Service.UsuarioService.ObterPorId(id);
+            if (user == null)
                 return View();
-            }
+
+            return View(user);
         }
 
-        // GET: Usuario/Edit/5
-        public IActionResult Edit(int id)
+        [HttpPost]
+        public IActionResult Editar(UsuarioViewModel usuario)
         {
+            if (ModelState.IsValid)
+            {
+                var result = Service.UsuarioService.Atualizar(usuario);
+                if (result)
+                {
+                    return View("Sucesso");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Falha ao atualizar cadastro!");
+                }
+            }
+
             return View();
         }
 
-        // POST: Usuario/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Usuario/Delete/5
-        public IActionResult Delete(int id)
+        [HttpGet]
+        public IActionResult Delete(Guid id)
         {
+            if (!Service.UsuarioService.Remover(id))
+                ModelState.AddModelError(string.Empty, "Falha ao excluir cadastro!");
+
             return View();
-        }
-
-        // POST: Usuario/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         #region Partial
         public ActionResult UsuarioModal()
         {
+
+            ViewBag.Transportadoras = new SelectList(Service.TransportadorService.ObterTodos(), "Id", "RazaoSocial");
+            ViewBag.Clientes = new SelectList(Service.ClienteService.ObterTodos(), "Id", "RazaoSocial");
+
             return PartialView();
         }
         #endregion

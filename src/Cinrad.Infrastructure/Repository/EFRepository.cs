@@ -40,7 +40,7 @@ namespace Cinrad.Infrastructure.Repository
             return dbSet.Find(id);
         }
 
-        public IEnumerable<TEntity> ObterTodos()
+        public virtual IEnumerable<TEntity> ObterTodos()
         {
             return dbSet.AsEnumerable();
         }

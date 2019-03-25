@@ -1,138 +1,121 @@
 ﻿@model IList<Cinrad.Service.ViewModels.UsuarioViewModel>
-    @{
-        ViewData["Title"] = "Usuarios";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+@{
+    ViewData["Title"] = "Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-    <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-lg-10">
-            <h2>Usuario</h2>
-            <ol class="breadcrumb">
-                <li>
-                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                </li>
-                <li class="active">
-                    <strong>Registar Usuário</strong>
-                </li>
-            </ol>
-        </div>
-        <div class="col-lg-2">
-
-        </div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Usuario</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            </li>
+            <li class="active">
+                <strong>Registar Usuário</strong>
+            </li>
+        </ol>
     </div>
-    <div class="wrapper wrapper-content  animated fadeInRight">
-        <div class="row">
-            <div class="col-sm-18">
-                <div class="ibox">
-                    <div class="ibox-content">
-                        <div class="row">
-                            <div class="col-sm-10">
-                                <div class="input-group">
-                                    <input type="text" placeholder="Search client " class="input form-control">
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn btn-white"> <i class="fa fa-search"></i> Search</button>
-                                    </span>
-                                </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-18">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <input type="text" placeholder="Search client " class="input form-control">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn btn-white"> <i class="fa fa-search"></i> Search</button>
+                                </span>
                             </div>
-                            <div class="col-sm-2 ">
-                                <div class="input-group">
-                                    <select name="status" id="status" class="input form-control btn-white">
-                                        <option value="1" selected>Ativo</option>
-                                        <option value="0">Inativo</option>
-                                    </select>
+                        </div>
+                        <div class="col-sm-2 ">
+                            <div class="input-group">
+                                <select name="status" id="status" class="input form-control btn-white">
+                                    <option value="1" selected>Ativo</option>
+                                    <option value="0">Inativo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clients-list ">
+                        <span class="input-group-btn">
+                            <a asp-action="UsuarioModal" asp-controller="Usuario" class="btn btn-primary" data-target="#modal-form" data-toggle="modal"> Novo</a>
+                        </span>
+
+                        <div id="modal-form" class="modal fade" aria-hidden="true" data-backdrop="false" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    @await Html.PartialAsync("UsuarioModal");
                                 </div>
                             </div>
                         </div>
-                        <div class="clients-list ">
-                            <span class="input-group-btn">
-                                <a asp-action="UsuarioModal" asp-controller="Usuario" class="btn btn-primary" data-target="#modal-form" data-toggle="modal"> Novo</a>
-                            </span>
 
-                            <div id="modal-form" class="modal fade" aria-hidden="true" data-backdrop="false" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        @await Html.PartialAsync("UsuarioModal");
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="table-responsive">
+                            @foreach (var user in ViewBag.Usuarios)
+                            {
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2">Nome</th>
+                                            <th>CPF</th>
+                                            <th colspan="2">Email</th>
+                                            <th colspan="2"> Celular</th>
+                                            <th> Perfil</th>
+                                            <th> Cliente </th>
+                                            <th> Transportadora </th>
+                                            <th colspan="3">Açoes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td hidden>@user.Id</td>
+                                            <td class="client-avatar"><h2><i class="fa fa-user"></i></h2></td>
+                                            <td><a data-toggle="tab" href="#contact-1" class="client-link">@user.Nome</a></td>
+                                            <td> @user.CPF</td>
+                                            <td class="contact-type"><i class="fa fa-envelope"> </i></td>
+                                            <td> @user.Email</td>
+                                            <td class="contact-type"><i class="fa fa-phone"> </i></td>
+                                            <td> @user.Celular</td>
+                                            @{ var userr = await UserManager.FindByEmailAsync(user.Email);
+                                                var role = await UserManager.GetRolesAsync(userr);
+                                                                                           <td>@role</td > }
 
-                            <div class="table-responsive">
-                                @foreach (var user in ViewBag.Usuarios)
-                                {
-
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-
-                                                <th colspan="2">Nome</th>
-                                                <th>CPF</th>
-                                                <th colspan="2">Email</th>
-                                                <th colspan="2"> Celular</th>
-                                                <th> Perfil</th>
-                                                <th> Cliente </th>
-                                                <th> Transportadora </th>
-
-                                                <th colspan="3">Açoes</th>
-
-                                            </tr>
-
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="client-avatar"><h2><i class="fa fa-user"></i></h2></td>
-                                                <td><a data-toggle="tab" href="#contact-1" class="client-link">@user.Nome</a></td>
-                                                <td> 221.537.268-08</td>
-                                                <td class="contact-type"><i class="fa fa-envelope"> </i></td>
-                                                <td> @user.Email</td>
-                                                <td class="contact-type"><i class="fa fa-phone"> </i></td>
-                                                <td> @user.Celular</td>
-                                                <td> Supervisor</td>
-                                                <td> Cliente 1</td>
-                                                <td> </td>
-                                                <td><a data-toggle="modal" href="#confirmRemoverModal" title="Remover"><h2> <i class="fa fa-trash"></i></h2></a></td>
-                                                <td><a data-toggle="modal" href="#modal-form" title="Editar"><h2><i class="fa fa-edit "></i></h2></a></td>
-                                            </tr>
-                                            @*<tr class=" text-warning">
-                                                    <td class="client-avatar"><img alt="image" src="img/a3.jpg"> </td>
-                                                    <td><a data-toggle="tab" href="#contact-2" class="client-link">Rooney Lindsay</a></td>
-                                                    <td>221.537.268-08</td>
-                                                    <td class="contact-type"><i class="fa fa-envelope"> </i></td>
-                                                    <td> rooney@proin.com</td>
-
-                                                    <td class="contact-type"><i class="fa fa-phone"> </i></td>
-                                                    <td> +5511 96753-0647</td>
-                                                    <td> Cliente</td>
-                                                    <td> </td>
-                                                    <td> Transp 1</td>
-                                                    <td><a href="#" title="Recuperar Registro"><h2><i class="fa fa-undo "></i></h2></a></td>
-
-                                                </tr>*@
-                                        </tbody>
-                                    </table>
-                                }
-                            </div>
+                                            <td> @user.ClienteNome</td>
+                                            <td>@user.TransportadoraNome </td>
+                                            <td><a data-toggle="modal" href="#confirmRemoverModal" title="Remover"><h2> <i class="fa fa-trash"></i></h2></a></td>
+                                            <td><a asp-action="Editar" id="@user.Id" asp-controller="Usuario" data-toggle="modal" data-target="#modal-form" title="Editar"><h2><i class="fa fa-edit "></i></h2></a></td>
+                                            <td><a href="#" title="Recuperar Registro"><h2><i class="fa fa-undo "></i></h2></a></td>
+</tbody>
+                                </table>
+                            }
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Modal HTML -->
-        <div id="confirmRemoverModal" class="modal fade">
-            <div class="modal-dialog modal-confirm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Tem certeza?</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Você realmente quer remover o registro?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-sm btn-default pull-left m-t-n-xs" data-dismiss="modal"><strong>  Não  </strong></button>
-                        <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>  SIM  </strong></button>
-                    </div>
+    <!-- Modal HTML -->
+    <div id="confirmRemoverModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Tem certeza?</h4>
                 </div>
-
+                <div class="modal-body">
+                    <p>Você realmente quer remover o registro?</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-default pull-left m-t-n-xs" data-dismiss="modal"><strong>  Não  </strong></button>
+                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>  SIM  </strong></button>
+                </div>
             </div>
+
         </div>
     </div>
+</div>

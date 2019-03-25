@@ -21,6 +21,6 @@ namespace Cinrad.Core.Entity
         public string NomeFantasia { get; set; }
         public string Telefone { get; set; }
         public string Site { get; set; }
-        public ICollection<Usuario> Usuarios { get; set; }
+        public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }

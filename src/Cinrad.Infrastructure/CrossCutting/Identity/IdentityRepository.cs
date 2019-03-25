@@ -14,11 +14,14 @@ namespace Cinrad.Infrastructure.CrossCutting.Identity
             _userManager = userManager;
         }
 
-        public async Task<Guid> CreateAsync(ApplicationUser applicationUser)
+        public async Task<Guid> CreateAsync(ApplicationUser applicationUser, string role)
         {
-            var result = await _userManager.CreateAsync(applicationUser, "Acindb@"+applicationUser.GetHashCode());
+            var passwordHash = "Acindb@" + applicationUser.GetHashCode();
+
+            var result = await _userManager.CreateAsync(applicationUser, passwordHash);
             if (result.Succeeded)
-            {
+            {                
+                await _userManager.AddToRoleAsync(applicationUser, role);
                 ApplicationUser user = await _userManager.FindByEmailAsync(applicationUser.Email);
                 return user.Id;
             }

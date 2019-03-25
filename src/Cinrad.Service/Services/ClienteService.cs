@@ -31,9 +31,21 @@ namespace Cinrad.Service.Services
             return _unitOfWork.Save() > 0;
         }
 
-        public void Atualizar(ClienteViewModel cliente)
+        public bool Atualizar(ClienteViewModel cliente)
         {
-            throw new NotImplementedException();
+            var cli = _mapper.Map<Cliente>(cliente);
+            var result = new ClienteValidator().Validate(cli);
+            if (!result.IsValid)
+                return false;
+
+            _unitOfWork.ClienteRepository.Atualizar(cli);
+
+            return _unitOfWork.Save() > 0;
+        }
+
+        public ClienteViewModel ObterPorId(Guid id)
+        {
+            return _mapper.Map<ClienteViewModel>(_unitOfWork.ClienteRepository.ObterPorId(id));
         }
 
         public IList<ClienteViewModel> ObterTodos()
@@ -41,9 +53,21 @@ namespace Cinrad.Service.Services
             return _mapper.Map<List<ClienteViewModel>>(_unitOfWork.ClienteRepository.ObterTodos());
         }
 
-        public void Remover(ClienteViewModel cliente)
+        public bool Remover(ClienteViewModel cliente)
         {
-            throw new NotImplementedException();
+            var cli = _mapper.Map<Cliente>(cliente);
+            var result = new ClienteValidator().Validate(cli);
+            if (!result.IsValid)
+                return false;
+
+            _unitOfWork.ClienteRepository.Remover(cli);
+            return _unitOfWork.Save() > 0;
+        }
+
+        public bool Remover(Guid id)
+        {
+            _unitOfWork.ClienteRepository.Remover(id);
+            return _unitOfWork.Save() > 0;
         }
     }
 }

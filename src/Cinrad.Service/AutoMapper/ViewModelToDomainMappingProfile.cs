@@ -9,7 +9,7 @@ namespace Cinrad.Service.AutoMapper
     {
         public ViewModelToDomainMappingProfile()
         {
-            CreateMap<UsuarioViewModel, Usuario>();
+            CreateMap<UsuarioViewModel, Usuario>();                
             CreateMap<ClienteViewModel, Cliente>();
             CreateMap<TransportadoraViewModel, Transportadora>();
             CreateMap<UsuarioViewModel, ApplicationUser>()

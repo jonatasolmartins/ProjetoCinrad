@@ -25,8 +25,8 @@ namespace Cinrad.Core.Entity
         public string Telefone { get; private set; }
         public bool IsDeleted { get; set; }
         public Guid? ClienteId { get; set; }
-        public Cliente Cliente { get; set; }
+        public virtual Cliente Cliente { get; set; }
         public Guid? TransportadoraId { get; set; }
-        public Transportadora Transportadora { get; set; }
+        public virtual Transportadora Transportadora { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Cinrad.Service.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Cinrad.UI.Web.Controllers
 {
@@ -12,14 +12,6 @@ namespace Cinrad.UI.Web.Controllers
         public IActionResult Index()
         {
             ViewBag.Clientes = Service.ClienteService.ObterTodos();
-            return View();
-        }
-
-        // GET: Cliente/Details/5
-        [HttpGet]
-        [ValidateAntiForgeryToken]
-        public IActionResult Details(int id)
-        {
             return View();
         }
 
@@ -34,78 +26,59 @@ namespace Cinrad.UI.Web.Controllers
                 if (result)
                     return RedirectToAction(nameof(Index));
             }
+
+            ModelState.AddModelError(string.Empty, "Tentativa de cadastro falhou!");
+
             return RedirectToAction(nameof(Index));
         }
 
-        // POST: Cliente/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Cliente/Edit/5
         [HttpGet]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id)
+        public IActionResult Editar(Guid id)
         {
-            return View();
+            var cliente = Service.ClienteService.ObterPorId(id);
+            if (cliente == null)
+                return View();
+
+            return View(cliente);
         }
 
-        // POST: Cliente/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Editar(ClienteViewModel cliente)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
 
-                return RedirectToAction(nameof(Index));
+                if (Service.ClienteService.Atualizar(cliente))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            catch
-            {
-                return View();
-            }
+            ModelState.AddModelError(string.Empty, "Falha ao atualizar cadastro!");
+            return View();
         }
 
         // GET: Cliente/Delete/5
         [HttpGet]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
+            if (Service.ClienteService.Remover(id))
+                ModelState.AddModelError(string.Empty, "Falha ao excluir cadastro!");
+
             return View();
         }
-
-        // POST: Cliente/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
 
         #region Partial
         public IActionResult ClienteModal()
+        {
+            return PartialView();
+        }
+
+        public IActionResult ClienteTransportadoraModal()
         {
             return PartialView();
         }

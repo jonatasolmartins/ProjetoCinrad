@@ -1,14 +1,15 @@
 ﻿using Cinrad.Service.ViewModels;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Cinrad.UI.Web.Controllers
 {
+    [Authorize("RequireSuperUserRole")]
     public class TransportadorController : BaseController
     {
 
         [HttpGet]
-        [ValidateAntiForgeryToken]
         public IActionResult Index()
         {
             ViewBag.Transportadoras = Service.TransportadorService.ObterTodos();
@@ -26,89 +27,60 @@ namespace Cinrad.UI.Web.Controllers
                 if (result)
                     return RedirectToAction(nameof(Index));
             }
+            ModelState.AddModelError(string.Empty, "Tentativa de cadastro falhou!");
+
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Transportador/Details/5
+
+
         [HttpGet]
         [ValidateAntiForgeryToken]
-        public IActionResult Details(int id)
+        public IActionResult Editar(Guid id)
         {
-            return View();
-        }
-
-        // POST: Transportador/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
+            var transportadora = Service.TransportadorService.ObeterPorId(id);
+            if (transportadora == null)
                 return View();
-            }
-        }
 
-        // GET: Transportador/Edit/5
-        [HttpGet]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id)
-        {
-            return View();
+            return View(transportadora);
         }
 
         // POST: Transportador/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Editar(TransportadoraViewModel transportadora)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                if (Service.TransportadorService.Atualizar(transportadora))
+                    return RedirectToAction(nameof(Index));
+            }
+            ModelState.AddModelError(string.Empty, "Falhou! ao atualizar cadastro!");
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: Transportador/Delete/5
         [HttpDelete]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
+            if (Service.TransportadorService.Remover(id))
+                ModelState.AddModelError(string.Empty, "Falha ao excluir cadastro!");
+
             return View();
-        }
-
-        // POST: Transportador/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        }     
 
 
         #region Partial
 
-        [HttpGet]
         public IActionResult TransportadorModal()
+        {
+            return PartialView();
+        }
+
+
+        public IActionResult TransportadoraClienteModal()
         {
             return PartialView();
         }

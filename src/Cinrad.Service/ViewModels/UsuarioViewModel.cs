@@ -1,9 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cinrad.Service.ViewModels
 {
     public class UsuarioViewModel
     {
+        [Display(Name ="Id")]
+        public Guid Id { get; set; }
+
         [Required]
         [Display(Name = "Nome")]
         [MaxLength(30)]
@@ -28,6 +32,20 @@ namespace Cinrad.Service.ViewModels
         [MaxLength(8)]
 
         public string Telefone { get; set; }
+       
+
+        [Display(Name = "ClienteId")]
+        public Guid? ClienteId { get; set; }
+
+        [Display(Name = "TransportadraId")]
+        public Guid? TransportadraId { get; set; }
+
+        [Display(Name = "Cliente")]
+        public string ClienteNome { get; set; }
+
+        [Display(Name = "Transportadora")]
+        public string TransportadoraNome { get; set; }
+
         [Display(Name = "Ativar/Desativar Cadastro")]
         public bool IsDeleted { get; set; }
     }

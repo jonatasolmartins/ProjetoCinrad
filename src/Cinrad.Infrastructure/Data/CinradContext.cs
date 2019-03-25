@@ -20,6 +20,11 @@ namespace Cinrad.Infrastructure.Data
         public DbSet<AgendaProducao> AgendaProducoes  { get; set; }
         public DbSet<ApresentacaoProduto> ApresentacaoProdutos  { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder
+                 .UseLazyLoadingProxies();
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuario>(new UsuarioMap().Configure);
