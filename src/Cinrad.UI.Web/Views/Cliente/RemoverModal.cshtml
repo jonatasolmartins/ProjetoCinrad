@@ -1,0 +1,12 @@
+﻿@model Cinrad.Service.ViewModels.ClienteViewModel
+
+<div class="modal-header">
+    <h4 class="modal-title">Tem certeza?</h4>
+</div>
+<div class="modal-body">
+    <p>Você realmente quer remover o registro?</p>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-sm btn-default pull-left m-t-n-xs" data-dismiss="modal"><strong>  Não  </strong></button>
+    <a asp-action="Remover" asp-controller="Cliente" asp-route-id="@ViewBag.Id" class="btn btn-sm btn-primary pull-right m-t-n-xs"><strong>  SIM  </strong></a>
+</div>

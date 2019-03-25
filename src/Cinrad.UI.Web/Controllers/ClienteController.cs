@@ -23,25 +23,11 @@ namespace Cinrad.UI.Web.Controllers
             if (ModelState.IsValid)
             {
                 var result = Service.ClienteService.Adicionar(cliente);
-                if (result)
-                    return RedirectToAction(nameof(Index));
+                if (!result)
+                    ModelState.AddModelError(string.Empty, "Tentativa de cadastro falhou!");
             }
 
-            ModelState.AddModelError(string.Empty, "Tentativa de cadastro falhou!");
-
             return RedirectToAction(nameof(Index));
-        }
-
-
-        [HttpGet]
-        [ValidateAntiForgeryToken]
-        public IActionResult Editar(Guid id)
-        {
-            var cliente = Service.ClienteService.ObterPorId(id);
-            if (cliente == null)
-                return View();
-
-            return View(cliente);
         }
 
         [HttpPost]
@@ -50,36 +36,56 @@ namespace Cinrad.UI.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                if (Service.ClienteService.Atualizar(cliente))
-                {
-                    return RedirectToAction(nameof(Index));
-                }
+                if (!Service.ClienteService.Atualizar(cliente))
+                    ModelState.AddModelError(string.Empty, "Falha ao atualizar cadastro!");
             }
-            ModelState.AddModelError(string.Empty, "Falha ao atualizar cadastro!");
-            return View();
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Cliente/Delete/5
         [HttpGet]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(Guid id)
+        public IActionResult Remover(Guid id)
         {
-            if (Service.ClienteService.Remover(id))
+            if (!Service.ClienteService.Remover(id))
                 ModelState.AddModelError(string.Empty, "Falha ao excluir cadastro!");
 
-            return View();
+            return RedirectToAction(nameof(Index));
         }
-        
+
 
         #region Partial
+        [HttpGet]
         public IActionResult ClienteModal()
         {
             return PartialView();
         }
 
+        [HttpGet]
         public IActionResult ClienteTransportadoraModal()
         {
+            return PartialView();
+        }
+
+        [HttpGet]        
+        public IActionResult EditarModal(Guid id)
+        {
+            var cliente = Service.ClienteService.ObterPorId(id);
+            if (cliente == null)
+                return PartialView();
+
+
+            return PartialView(cliente);
+        }
+
+        [HttpGet]
+        public IActionResult RemoverModal(Guid id)
+        {
+            var cliente = Service.ClienteService.ObterPorId(id);
+            if (cliente != null)
+                ViewBag.Id = cliente.Id;
+
             return PartialView();
         }
         #endregion

@@ -24,26 +24,12 @@ namespace Cinrad.UI.Web.Controllers
             if (ModelState.IsValid)
             {
                 var result = Service.TransportadorService.Adicionar(transportadora);
-                if (result)
-                    return RedirectToAction(nameof(Index));
-            }
-            ModelState.AddModelError(string.Empty, "Tentativa de cadastro falhou!");
+                if (!result)
+                    ModelState.AddModelError(string.Empty, "Tentativa de cadastro falhou!");
+            }           
 
             return RedirectToAction(nameof(Index));
-        }
-
-
-
-        [HttpGet]
-        [ValidateAntiForgeryToken]
-        public IActionResult Editar(Guid id)
-        {
-            var transportadora = Service.TransportadorService.ObeterPorId(id);
-            if (transportadora == null)
-                return View();
-
-            return View(transportadora);
-        }
+        }        
 
         // POST: Transportador/Edit/5
         [HttpPost]
@@ -52,36 +38,57 @@ namespace Cinrad.UI.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Service.TransportadorService.Atualizar(transportadora))
-                    return RedirectToAction(nameof(Index));
-            }
-            ModelState.AddModelError(string.Empty, "Falhou! ao atualizar cadastro!");
+                if (!Service.TransportadorService.Atualizar(transportadora))
+                    ModelState.AddModelError(string.Empty, "Falhou! ao atualizar cadastro!");
+            }            
 
-            return View();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Transportador/Delete/5
         [HttpDelete]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(Guid id)
+        public IActionResult Remover(Guid id)
         {
-            if (Service.TransportadorService.Remover(id))
+            if (!Service.TransportadorService.Remover(id))
                 ModelState.AddModelError(string.Empty, "Falha ao excluir cadastro!");
 
-            return View();
+            return RedirectToAction(nameof(Index));
         }     
 
 
         #region Partial
-
+        [HttpGet]
         public IActionResult TransportadorModal()
         {
             return PartialView();
         }
 
 
+        [HttpGet]
         public IActionResult TransportadoraClienteModal()
         {
+            return PartialView();
+        }
+
+        
+        [HttpGet]
+        public IActionResult EditarModal(Guid id)
+        {
+            var transportadora = Service.TransportadorService.ObeterPorId(id);
+            if (transportadora == null)
+                return PartialView();
+
+            return PartialView(transportadora);
+        }
+
+        [HttpGet]
+        public IActionResult RemoverModal(Guid id)
+        {
+            var cliente = Service.TransportadorService.ObeterPorId(id);
+            if (cliente != null)
+                ViewBag.Id = cliente.Id;
+
             return PartialView();
         }
         #endregion

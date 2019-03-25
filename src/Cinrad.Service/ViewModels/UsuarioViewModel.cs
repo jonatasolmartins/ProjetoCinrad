@@ -30,21 +30,13 @@ namespace Cinrad.Service.ViewModels
 
         [Display(Name = "Telefone")]
         [MaxLength(8)]
-
-        public string Telefone { get; set; }
-       
+        public string Telefone { get; set; }       
 
         [Display(Name = "ClienteId")]
         public Guid? ClienteId { get; set; }
 
         [Display(Name = "TransportadraId")]
-        public Guid? TransportadraId { get; set; }
-
-        [Display(Name = "Cliente")]
-        public string ClienteNome { get; set; }
-
-        [Display(Name = "Transportadora")]
-        public string TransportadoraNome { get; set; }
+        public Guid? TransportadraId { get; set; }   
 
         [Display(Name = "Ativar/Desativar Cadastro")]
         public bool IsDeleted { get; set; }

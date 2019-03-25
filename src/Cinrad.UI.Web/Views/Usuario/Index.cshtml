@@ -54,6 +54,21 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="modal-edit" class="modal fade" aria-hidden="true" data-backdrop="false" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    @await Html.PartialAsync("EditarModal");
+                                </div>
+                            </div>
+                        </div>
+                        <div id="confirmRemoverModal" class="modal fade">
+                            <div class="modal-dialog modal-confirm">
+                                <div class="modal-content">
+                                    @await Html.PartialAsync("RemoverModal");
+                                </div>
+
+                            </div>
+                        </div>
 
                         <div class="table-responsive">
                             @foreach (var user in ViewBag.Usuarios)
@@ -81,16 +96,13 @@
                                             <td> @user.Email</td>
                                             <td class="contact-type"><i class="fa fa-phone"> </i></td>
                                             <td> @user.Celular</td>
-                                            @{ var userr = await UserManager.FindByEmailAsync(user.Email);
-                                                var role = await UserManager.GetRolesAsync(userr);
-                                                                                           <td>@role</td > }
-
-                                            <td> @user.ClienteNome</td>
-                                            <td>@user.TransportadoraNome </td>
-                                            <td><a data-toggle="modal" href="#confirmRemoverModal" title="Remover"><h2> <i class="fa fa-trash"></i></h2></a></td>
-                                            <td><a asp-action="Editar" id="@user.Id" asp-controller="Usuario" data-toggle="modal" data-target="#modal-form" title="Editar"><h2><i class="fa fa-edit "></i></h2></a></td>
-                                            <td><a href="#" title="Recuperar Registro"><h2><i class="fa fa-undo "></i></h2></a></td>
-</tbody>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><a asp-action="RemoverModal" asp-controller="Usuario" asp-route-id="@user.Id" data-toggle="modal" data-target="#confirmRemoverModal" title="Remover"><h2> <i class="fa fa-trash"></i></h2></a></td>
+                                            <td><a asp-action="EditarModal" asp-controller="Usuario" asp-route-id="@user.Id" data-toggle="modal" data-target="#modal-edit" title="Editar"><h2><i class="fa fa-edit "></i></h2></a></td>
+                                            @*<td><a href="#" title="Recuperar Registro"><h2><i class="fa fa-undo "></i></h2></a></td>*@
+                                    </tbody>
                                 </table>
                             }
                         </div>
@@ -98,24 +110,5 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Modal HTML -->
-    <div id="confirmRemoverModal" class="modal fade">
-        <div class="modal-dialog modal-confirm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Tem certeza?</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Você realmente quer remover o registro?</p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-sm btn-default pull-left m-t-n-xs" data-dismiss="modal"><strong>  Não  </strong></button>
-                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>  SIM  </strong></button>
-                </div>
-            </div>
-
-        </div>
-    </div>
+    </div>   
 </div>

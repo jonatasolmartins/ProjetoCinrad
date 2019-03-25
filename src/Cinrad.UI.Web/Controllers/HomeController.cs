@@ -17,46 +17,16 @@ namespace Cinrad.UI.Web.Controllers
             return View();
         }
 
-              
-        [Authorize("RequireSuperUserRole")]        
-        public async Task<IActionResult> RegistrarCliente(ClienteViewModel model, string returnUrl = null)
+        [Authorize("RequireSuperUserRole")]
+        public IActionResult Pedidos(PedidoViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-
-                //await Service.UsuarioService.Adicionar(model);            
-
             }
 
             return View(model);
         }
-                 
-
-        [Authorize("RequireSuperUserRole")]        
-        public async Task<IActionResult> RegistrarTransportadora(TransportadoraViewModel model, string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
-            {               
-                
-            }
-
-            return View(model);
-        }
-
-       
-        [Authorize("RequireSuperUserRole")]
-        public async Task<IActionResult> Pedidos(PedidoViewModel model, string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
-            {                
-            }
-
-            return View(model);
-        }
-
 
         public IActionResult Privacy()
         {

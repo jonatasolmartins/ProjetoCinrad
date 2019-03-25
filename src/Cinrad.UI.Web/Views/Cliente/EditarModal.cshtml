@@ -1,20 +1,21 @@
 ﻿@model Cinrad.Service.ViewModels.ClienteViewModel
 
 <div class="modal-header">
-    <h3 class="m-t-none m-b">Novo Cliente</h3>
+    <h3 class="m-t-none m-b">Atualizar Cliente</h3>
 </div>
 <div class="modal-body">
     <div class="row">
         <div>
-            <form role="form" asp-action="Registrar" asp-controller="Cliente" method="post">
+            <form role="form" asp-action="Editar" asp-controller="Cliente" method="post">
                 <div class="text-danger" asp-validation-summary="All"></div>
                 <div hidden>
                     <input asp-for="Id" />
                 </div>
                 <div class="form-group">
                     <label asp-for="Codigo"></label>
-                    <input asp-for="Codigo" placeholder="* Codigo" type="text" class="form-control" />
-                    <span asp-validation-for="Codigo" class="text-danger"></span>
+                    <input placeholder="* Codigo" type="text" class="form-control" />
+                    @*<input asp-for="Codigo" placeholder="* Codigo" type="text" class="form-control" />
+                    <span asp-validation-for="Codigo" class="text-danger"></span>*@
                 </div>
                 <div class="form-group">
                     <label asp-for="Cnpj"></label>
@@ -35,7 +36,7 @@
                     <label asp-for="Telefone"></label>
                     <input asp-for="Telefone" placeholder="* Telefone Coorporativo" type="text" class="form-control" />
                     <span asp-validation-for="Telefone" class="text-danger"></span>
-                </div>                
+                </div>
                 <div class="form-group">
                     <label asp-for="Site"></label>
                     <input asp-for="Site" placeholder="Site" type="text" class="form-control" />
