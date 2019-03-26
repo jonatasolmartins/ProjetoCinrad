@@ -1,5 +1,5 @@
 ﻿using Cinrad.Core.Entity;
-using Cinrad.Infrastructure.Map;
+using Cinrad.Infrastructure.EntityConfig.Map;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
@@ -19,6 +19,7 @@ namespace Cinrad.Infrastructure.Data
         public DbSet<Produto> Produtos  { get; set; }
         public DbSet<AgendaProducao> AgendaProducoes  { get; set; }
         public DbSet<ApresentacaoProduto> ApresentacaoProdutos  { get; set; }
+        public DbSet<ClienteTransportadora> ClienteTransportadoras { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,6 +35,7 @@ namespace Cinrad.Infrastructure.Data
             modelBuilder.Entity<Produto>(new ProdutoMap().Configure);
             modelBuilder.Entity<AgendaProducao>(new AgendaProducaoMap().Configure);
             modelBuilder.Entity<ApresentacaoProduto>(new ApresentacaoProdutoMap().Configure);
+            modelBuilder.Entity<ClienteTransportadora>(new ClienteTransportadoraMap().Configure);
         }
 
         public override int SaveChanges()

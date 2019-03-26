@@ -7,11 +7,11 @@ namespace Cinrad.Core.Entity
     {
         public Transportadora(Guid codigo, string cnpj, string razaosocial, string nomefantasia, string site)
         {
-            this.Codigo = codigo;
-            this.Cnpj = cnpj;
-            this.RazaoSocial = razaosocial;
-            this.NomeFantasia = nomefantasia;
-            this.Site = site;
+            Codigo = codigo;
+            Cnpj = cnpj;
+            RazaoSocial = razaosocial;
+            NomeFantasia = nomefantasia;
+            Site = site;
         }
         protected Transportadora() { }
         public Guid Codigo { get; set; }
@@ -21,5 +21,6 @@ namespace Cinrad.Core.Entity
         public string Telefone { get; set; }
         public string Site { get; set; }
         public virtual ICollection<Usuario> Usuarios { get; set; }
+        public virtual ICollection<ClienteTransportadora> ClienteTransportadoras { get; set; }
     }
 }

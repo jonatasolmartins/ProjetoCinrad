@@ -2,7 +2,7 @@ using Cinrad.Core.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Cinrad.Infrastructure.Map
+namespace Cinrad.Infrastructure.EntityConfig.Map
 {
     public class ApresentacaoProdutoMap : IEntityTypeConfiguration<ApresentacaoProduto>
     {
