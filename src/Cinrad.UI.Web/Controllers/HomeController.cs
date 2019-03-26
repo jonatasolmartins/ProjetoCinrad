@@ -3,7 +3,6 @@ using Cinrad.UI.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace Cinrad.UI.Web.Controllers
 {
