@@ -10,11 +10,12 @@ namespace Cinrad.UI.Web.Controllers
 {
     public class AccountController : BaseController
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;       
-
-        public AccountController(SignInManager<ApplicationUser> signInManager)
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {            
-            _signInManager = signInManager;            
+            _signInManager = signInManager;
+            _userManager = userManager;
         }       
    
 
@@ -37,10 +38,11 @@ namespace Cinrad.UI.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-                
-                if (result.Succeeded)
-                {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, false);
+                if (result.Succeeded)          
+                {                   
+
                     if (!string.IsNullOrEmpty(returnUrl))
                     {
                         return RedirectToLocal(returnUrl);

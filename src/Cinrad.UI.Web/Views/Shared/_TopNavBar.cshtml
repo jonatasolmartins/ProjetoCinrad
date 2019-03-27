@@ -1,8 +1,9 @@
 ﻿@using Cinrad.Infrastructure.CrossCutting.Identity
 @inject SignInManager<ApplicationUser> SigninManager
 @inject UserManager<ApplicationUser> UserManager
+
 <div class="row border-bottom">
-    <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+    <nav class="navbar navbar-static-top blue-bg" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
             <form role="search" class="navbar-form-custom" action="search_results.html">
@@ -58,17 +59,17 @@
                     </ul>
                 </li>*@
                 <li>
-                    <a asp-area="" asp-controller="Home" asp-action="#">@UserManager.GetUserName(User)</a>
+                    <a asp-area="" asp-controller="Home" asp-action="#" style=" color: white">@UserManager.GetUserName(User)</a>
                 </li>
                 <li>
-                    <a asp-area="" asp-controller="Account" asp-action="Logout"><i class="fa fa-sign-out"></i> <span class="nav-label">Sair</span></a>
+                    <a asp-area="" asp-controller="Account" asp-action="Logout" style=" color: white"><i class="fa fa-sign-out"></i> <span class="nav-label">Sair</span></a>
                 </li>
             }
             else
             {
 
                 <li>
-                    <a asp-area="" asp-controller="Account" asp-action="Login"><i class="fa fa-sign-in"></i> <span class="nav-label">Entrar</span></a>
+                    <a asp-area="" asp-controller="Account" asp-action="Login" style=" color: white"><i class="fa fa-sign-in"></i> <span class="nav-label">Entrar</span></a>
                 </li>
             }
         </ul>

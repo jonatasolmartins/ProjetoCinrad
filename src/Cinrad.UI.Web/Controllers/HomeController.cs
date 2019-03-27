@@ -30,6 +30,12 @@ namespace Cinrad.UI.Web.Controllers
             return View(model);
         }
 
+        [HttpGet]        
+        public IActionResult Calculadora()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Privacy()
         {

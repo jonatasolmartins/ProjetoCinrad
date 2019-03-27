@@ -1,5 +1,4 @@
-﻿using Cinrad.Core.Entity;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using System;
 
 namespace Cinrad.Infrastructure.CrossCutting.Identity
@@ -8,10 +7,17 @@ namespace Cinrad.Infrastructure.CrossCutting.Identity
     {
         public override string UserName { get; set; }
         public override string Email { get; set; }
-
-        public override int GetHashCode()
+        public string Password
         {
-            return (UserName.GetHashCode() * 907) + Id.GetHashCode();
+            get
+            {
+                return "Acindb@"+(this.UserName.GetHashCode() * 907) + Id.GetHashCode();
+            }
         }
+
+        //public override int GetHashCode()
+        //{
+        //    return (UserName.GetHashCode() * 907) + Id.GetHashCode();
+        //}
     }
 }
