@@ -7,8 +7,8 @@
 <div class="modal-body">
     <div class="row">
         <div>
-            <form role="form" asp-controller="Usuario" asp-action="Editar" method="post">
-                <div class="text-danger" asp-validation-summary="All"></div>
+            <form role="form"  asp-action="Editar" asp-controller="Usuario" method="post">
+                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                 <div hidden>
                     <input asp-for="Id" />
                 </div>
@@ -48,17 +48,19 @@
                     <label class="font-noraml">Cliente</label>
                     <div class="input-group">
                         <select asp-for="ClienteId" asp-items="@ViewBag.Clientes">
-                            
+                            <option value="">--Nenhum--</option>
                         </select>
+                        <span asp-validation-for="ClienteId"></span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="font-noraml">Transportador</label>
                     <div class="input-group">
-                        <select asp-for="TransportadraId" asp-items="@ViewBag.Transportadoras">
-                            
+                        <select asp-for="TransportadoraId" asp-items="@ViewBag.Transportadoras">
+                            <option value="">--Nenhum--</option>
                         </select>
+                        <span asp-validation-for="TransportadoraId"></span>
                     </div>
                 </div>
                 <div class="modal-footer">

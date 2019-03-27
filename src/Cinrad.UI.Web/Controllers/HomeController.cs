@@ -6,17 +6,20 @@ using System.Diagnostics;
 
 namespace Cinrad.UI.Web.Controllers
 {
+    [Authorize("RequireSuperUserRole")]
     public class HomeController : BaseController
     {
 
 
-        [Authorize("RequireSuperUserRole")]
+        [AllowAnonymous]
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
         [Authorize("RequireSuperUserRole")]
+        [HttpPost]
         public IActionResult Pedidos(PedidoViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -27,6 +30,7 @@ namespace Cinrad.UI.Web.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public IActionResult Privacy()
         {
             return View();

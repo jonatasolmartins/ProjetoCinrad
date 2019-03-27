@@ -16,9 +16,9 @@ namespace Cinrad.Infrastructure.CrossCutting.Identity
 
         public async Task<Guid> CreateAsync(ApplicationUser applicationUser, string role)
         {
-            var passwordHash = "Acindb@" + applicationUser.GetHashCode();
+            var newPassword = "Acindb@" + applicationUser.GetHashCode();
 
-            var result = await _userManager.CreateAsync(applicationUser, passwordHash);
+            var result = await _userManager.CreateAsync(applicationUser, newPassword);
             if (result.Succeeded)
             {                
                 await _userManager.AddToRoleAsync(applicationUser, role);
@@ -27,5 +27,6 @@ namespace Cinrad.Infrastructure.CrossCutting.Identity
             }
             return Guid.Empty;
         }
+       
     }
 }

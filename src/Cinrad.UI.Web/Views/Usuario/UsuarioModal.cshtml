@@ -46,7 +46,7 @@
                     <label class="font-noraml">Cliente</label>
                     <div class="input-group">
                         <select asp-for="ClienteId" asp-items="@ViewBag.Clientes">
-                            <option value="0">--Nenhum--</option>
+                            <option value="">--Nenhum--</option>
                         </select>
                     </div>
                 </div>
@@ -54,8 +54,8 @@
                 <div class="form-group">
                     <label class="font-noraml">Transportador</label>
                     <div class="input-group">
-                        <select asp-for="TransportadraId" asp-items="@ViewBag.Transportadoras">
-                            <option value="0">--Nenhum--</option>
+                        <select asp-for="TransportadoraId" asp-items="@ViewBag.Transportadoras">
+                            <option value="">--Nenhum--</option>
                         </select>
                     </div>
                 </div>

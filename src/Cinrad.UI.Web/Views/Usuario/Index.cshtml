@@ -71,22 +71,22 @@
                         </div>
 
                         <div class="table-responsive">
-                            @foreach (var user in ViewBag.Usuarios)
-                            {
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2">Nome</th>
-                                            <th>CPF</th>
-                                            <th colspan="2">Email</th>
-                                            <th colspan="2"> Celular</th>
-                                            <th> Perfil</th>
-                                            <th> Cliente </th>
-                                            <th> Transportadora </th>
-                                            <th colspan="3">Açoes</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Nome</th>
+                                        <th>CPF</th>
+                                        <th colspan="2">Email</th>
+                                        <th colspan="2"> Celular</th>
+                                        <th> Perfil</th>
+                                        <th> Cliente </th>
+                                        <th> Transportadora </th>
+                                        <th colspan="3">Açoes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var user in ViewBag.Usuarios)
+                                    {
                                         <tr>
                                             <td hidden>@user.Id</td>
                                             <td class="client-avatar"><h2><i class="fa fa-user"></i></h2></td>
@@ -96,19 +96,43 @@
                                             <td> @user.Email</td>
                                             <td class="contact-type"><i class="fa fa-phone"> </i></td>
                                             <td> @user.Celular</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>Perfil</td>
+                                            @if (user.Cliente != null)
+                                            {
+                                                <td>@user.Cliente.RazaoSocial</td>
+                                            }
+                                            else
+                                            {
+                                                <td>Nenhum</td>
+                                            }
+                                            @if (user.Transportadora != null)
+                                            {
+                                                <td>@user.Transportadora.RazaoSocial</td>
+                                            }
+                                            else
+                                            {
+                                                <td>Nenhum</td>
+                                            }
                                             <td><a asp-action="RemoverModal" asp-controller="Usuario" asp-route-id="@user.Id" data-toggle="modal" data-target="#confirmRemoverModal" title="Remover"><h2> <i class="fa fa-trash"></i></h2></a></td>
                                             <td><a asp-action="EditarModal" asp-controller="Usuario" asp-route-id="@user.Id" data-toggle="modal" data-target="#modal-edit" title="Editar"><h2><i class="fa fa-edit "></i></h2></a></td>
-                                            @*<td><a href="#" title="Recuperar Registro"><h2><i class="fa fa-undo "></i></h2></a></td>*@
-                                    </tbody>
-                                </table>
-                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>   
+    </div>
 </div>
+@section Script{
+    <script>
+        $(document).ready(function () {
+            $('#modal-form').data('modal', null);
+            $('#modal-edit').data('modal', null);
+            $('#confirmRemoverModal').data('modal', null);
+        });
+    </script>
+
+}

@@ -5,6 +5,6 @@ namespace Cinrad.Infrastructure.CrossCutting.Identity.Interface
 {
     public interface IIdenityRepository
     {
-        Task<Guid> CreateAsync(ApplicationUser applicationUser, string role);
+        Task<Guid> CreateAsync(ApplicationUser applicationUser, string role);        
     }
 }

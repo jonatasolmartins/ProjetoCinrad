@@ -73,7 +73,7 @@ namespace Cinrad.Service.Services
         }
 
         public IList<UsuarioViewModel> ObterTodos()
-        {
+        {            
             var teste = _unitOfWork.UsuarioRepository.ObterTodos();
             return _mapper.Map<List<UsuarioViewModel>>(teste);
         }
