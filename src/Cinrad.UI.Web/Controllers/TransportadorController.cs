@@ -45,9 +45,8 @@ namespace Cinrad.UI.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Transportador/Delete/5
-        [HttpDelete]
-        [ValidateAntiForgeryToken]
+        // GET: Transportador/Delete/Id
+        [HttpGet]       
         public IActionResult Remover(Guid id)
         {
             if (!Service.TransportadorService.Remover(id))
@@ -62,14 +61,7 @@ namespace Cinrad.UI.Web.Controllers
         public IActionResult TransportadorModal()
         {
             return PartialView();
-        }
-
-
-        [HttpGet]
-        public IActionResult TransportadoraClienteModal()
-        {
-            return PartialView();
-        }
+        }        
 
         
         [HttpGet]

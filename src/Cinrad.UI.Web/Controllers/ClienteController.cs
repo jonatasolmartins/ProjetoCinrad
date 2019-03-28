@@ -1,6 +1,7 @@
 ﻿using Cinrad.Service.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 
 namespace Cinrad.UI.Web.Controllers
@@ -19,14 +20,26 @@ namespace Cinrad.UI.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Registrar(ClienteViewModel cliente)
-        {
+        {           
             if (ModelState.IsValid)
             {
+
                 var result = Service.ClienteService.Adicionar(cliente);
                 if (!result)
                     ModelState.AddModelError(string.Empty, "Tentativa de cadastro falhou!");
             }
 
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AssociarTransportadora(ClienteTransportadoraViewModel clienteTransportadora)
+        {
+            if(ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Index));
+            }
             return RedirectToAction(nameof(Index));
         }
 
@@ -44,8 +57,7 @@ namespace Cinrad.UI.Web.Controllers
         }
 
         // GET: Cliente/Delete/5
-        [HttpGet]
-        [ValidateAntiForgeryToken]
+        [HttpGet]        
         public IActionResult Remover(Guid id)
         {
             if (!Service.ClienteService.Remover(id))
@@ -63,8 +75,15 @@ namespace Cinrad.UI.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ClienteTransportadoraModal()
+        public IActionResult ClienteTransportadoraModal(Guid id)
         {
+            var cliente = Service.ClienteService.ObterPorId(id);
+            if (cliente == null)
+                return PartialView();
+
+            ViewBag.Transportadoras = new SelectList(Service.TransportadorService.ObterTodos(), "Id", "RazaoSocial");
+            ViewBag.Id = cliente.Id;
+            ViewBag.ClienteTransportadora = new SelectList(Service.ClienteService.ListarTransportadoras(id), "Id", "TransportadoraId");
             return PartialView();
         }
 

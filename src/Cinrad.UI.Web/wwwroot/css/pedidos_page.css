@@ -1,13 +1,12 @@
-﻿body {
-}
-
-.page-heading {
+﻿.page-heading {
     border-top: 0;
     padding: 0px 10px 20px 10px;
 }
+
 .border-bottom {
     border-bottom: 1px solid #e7eaec !important;
 }
+
 .row {
     margin-right: -15px;
     margin-left: -15px;

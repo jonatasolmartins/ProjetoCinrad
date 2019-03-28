@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Cinrad.Core.Entity
 {
     public class Cliente : Entity
     {
-        public Cliente(Guid codigo, string cnpj, string razaosocial, string nomefantasia, string site)
-        {
-            Codigo = codigo;
+        public Cliente(string cnpj, string razaosocial, string nomefantasia, string site)
+        {           
             Cnpj = cnpj;
             RazaoSocial = razaosocial;
             NomeFantasia = nomefantasia;
             Site = site;
         }
 
-        protected Cliente(){}
-        public Guid Codigo { get; set; }
+        protected Cliente(){}       
         public string Cnpj { get; set; }
         public string RazaoSocial { get; set; }
         public string NomeFantasia { get; set; }

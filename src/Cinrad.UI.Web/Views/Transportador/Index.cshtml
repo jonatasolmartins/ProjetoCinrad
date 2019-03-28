@@ -75,8 +75,7 @@
                             {
                                 <table class="table table-striped">
                                     <thead>
-                                        <tr>
-                                            <th>Código</th>
+                                        <tr>                                            
                                             <th>CNPJ</th>
                                             <th>Razão Social</th>
                                             <th> Nome Fantasia</th>
@@ -86,8 +85,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>@transportadora.Codigo</td>
+                                        <tr>                                            
                                             <td>@transportadora.Cnpj</td>
                                             <td>@transportadora.RazaoSocial</td>
                                             <td>@transportadora.NomeFantasia</td>
@@ -95,7 +93,7 @@
                                             <td>@transportadora.Site</td>                                                                                   
                                             <td><a asp-action="RemoverModal" asp-controller="Transportador" asp-route-id="@transportadora.Id" data-toggle="modal" data-target="#confirmRemoverModal" title="Remover"><h2> <i class="fa fa-trash"></i></h2></a></td>
                                             <td><a asp-action="EditarModal" asp-controller="Transportador" asp-route-id="@transportadora.Id" data-toggle="modal" data-target="#modal-edit" title="Editar"><h2><i class="fa fa-edit "></i></h2></a></td>
-                                            <td><a asp-action="ClienteTransportadoraModal" asp-controller="Transportador" data-target="#modal-transportadora" data-toggle="modal"><h2><i class="fa fa-users "></i></h2></a>
+                                            @*<td><a asp-action="ClienteTransportadoraModal" asp-controller="Transportador" data-target="#modal-transportadora" data-toggle="modal"><h2><i class="fa fa-users "></i></h2></a>*@
                                         </tr>
                                     </tbody>
                                 </table>

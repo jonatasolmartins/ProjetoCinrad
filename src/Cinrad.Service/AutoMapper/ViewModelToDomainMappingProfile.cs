@@ -13,7 +13,7 @@ namespace Cinrad.Service.AutoMapper
             CreateMap<ClienteViewModel, Cliente>();
             CreateMap<TransportadoraViewModel, Transportadora>();
             CreateMap<UsuarioViewModel, ApplicationUser>()
-                .ConstructUsing(c => new ApplicationUser { UserName = c.Nome, Email = c.Email });
+                .ConstructUsing(c => new ApplicationUser { UserName = c.Nome, Email = c.Email });            
 
         }
     }

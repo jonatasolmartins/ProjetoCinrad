@@ -11,12 +11,7 @@ namespace Cinrad.Infrastructure.EntityConfig.Map
 
             builder.ToTable("Transportadora");
 
-            builder.HasKey(c => c.Id);
-
-            builder.Property(c => c.Codigo)
-                .HasColumnName("codigo")
-                .HasColumnType("uniqueidentifier")
-                .IsRequired();
+            builder.HasKey(c => c.Id);            
 
             builder.Property(c => c.Cnpj)
                .HasColumnName("Cnpj")

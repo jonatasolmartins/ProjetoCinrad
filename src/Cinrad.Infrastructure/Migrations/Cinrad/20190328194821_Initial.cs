@@ -34,8 +34,7 @@ namespace Cinrad.Infrastructure.Migrations.Cinrad
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    codigo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Cnpj = table.Column<string>(nullable: true),
+                    Cnpj = table.Column<string>(maxLength: 14, nullable: false),
                     RazaoSocial = table.Column<string>(maxLength: 100, nullable: false),
                     NomeFantasia = table.Column<string>(maxLength: 100, nullable: true),
                     Telefone = table.Column<string>(maxLength: 20, nullable: true),
@@ -80,8 +79,7 @@ namespace Cinrad.Infrastructure.Migrations.Cinrad
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    codigo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Cnpj = table.Column<string>(nullable: true),
+                    Cnpj = table.Column<string>(maxLength: 14, nullable: false),
                     RazaoSocial = table.Column<string>(maxLength: 100, nullable: false),
                     NomeFantasia = table.Column<string>(maxLength: 100, nullable: true),
                     Telefone = table.Column<string>(maxLength: 20, nullable: true),
@@ -90,6 +88,30 @@ namespace Cinrad.Infrastructure.Migrations.Cinrad
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Transportadora", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ClienteTransportadora",
+                columns: table => new
+                {
+                    ClienteId = table.Column<Guid>(nullable: false),
+                    TransportadoraId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClienteTransportadora", x => new { x.ClienteId, x.TransportadoraId });
+                    table.ForeignKey(
+                        name: "FK_ClienteTransportadora_Cliente_ClienteId",
+                        column: x => x.ClienteId,
+                        principalTable: "Cliente",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ClienteTransportadora_Transportadora_TransportadoraId",
+                        column: x => x.TransportadoraId,
+                        principalTable: "Transportadora",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -124,6 +146,11 @@ namespace Cinrad.Infrastructure.Migrations.Cinrad
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_ClienteTransportadora_TransportadoraId",
+                table: "ClienteTransportadora",
+                column: "TransportadoraId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Usuario_ClienteId",
                 table: "Usuario",
                 column: "ClienteId");
@@ -141,6 +168,9 @@ namespace Cinrad.Infrastructure.Migrations.Cinrad
 
             migrationBuilder.DropTable(
                 name: "ApresentacaoProduto");
+
+            migrationBuilder.DropTable(
+                name: "ClienteTransportadora");
 
             migrationBuilder.DropTable(
                 name: "Pedido");

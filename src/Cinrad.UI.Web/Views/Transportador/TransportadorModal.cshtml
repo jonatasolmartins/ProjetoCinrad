@@ -1,4 +1,5 @@
 ﻿@model Cinrad.Service.ViewModels.TransportadoraViewModel
+@using System
 <div class="modal-header">
     <h3 class="m-t-none m-b">Nova Transportadora</h3>
 </div>
@@ -9,13 +10,8 @@
             <form role="form" asp-action="Registrar" asp-controller="Transportador">
                 <div class="text-danger" asp-validation-summary="All"></div>
                 <div hidden>
-                    <input asp-for="Id" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="Codigo"></label>
-                    <input asp-for="Codigo" placeholder="* Codigo" type="text" class="form-control" />
-                    <span asp-validation-for="Codigo" class="text-danger"></span>
-                </div>
+                    <input asp-for="Id" value="@Guid.Empty"/>
+                </div>              
                 <div class="form-group">
                     <label asp-for="Cnpj"></label>
                     <input asp-for="Cnpj" placeholder="* CNPJ" type="text" class="form-control" />

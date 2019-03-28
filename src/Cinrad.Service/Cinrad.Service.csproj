@@ -451,6 +451,7 @@
     <Compile Include="Validators\UsuarioValidator.cs" />
     <Compile Include="ViewModels\AgendaProducao.cs" />
     <Compile Include="ViewModels\ApresentacaoProdutoViewModel.cs" />
+    <Compile Include="ViewModels\ClienteTransportadoraViewModel.cs" />
     <Compile Include="ViewModels\ClienteViewModel.cs" />
     <Compile Include="ViewModels\PedidoViewModel.cs" />
     <Compile Include="ViewModels\ProdutoViewModel.cs" />

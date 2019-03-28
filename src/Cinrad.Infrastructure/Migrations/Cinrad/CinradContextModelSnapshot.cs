@@ -49,10 +49,6 @@ namespace Cinrad.Infrastructure.Migrations.Cinrad
                         .HasColumnName("Cnpj")
                         .HasMaxLength(14);
 
-                    b.Property<Guid>("Codigo")
-                        .HasColumnName("codigo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("NomeFantasia")
                         .HasColumnName("NomeFantasia")
                         .HasMaxLength(100);
@@ -131,10 +127,6 @@ namespace Cinrad.Infrastructure.Migrations.Cinrad
                         .IsRequired()
                         .HasColumnName("Cnpj")
                         .HasMaxLength(14);
-
-                    b.Property<Guid>("Codigo")
-                        .HasColumnName("codigo")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("NomeFantasia")
                         .HasColumnName("NomeFantasia")

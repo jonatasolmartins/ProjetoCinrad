@@ -1,4 +1,4 @@
-﻿function teste() {
+﻿function onready() {
     $('.dataTables-example').dataTable({
         responsive: true,
         "dom": 'T<"clear">lfrtip',

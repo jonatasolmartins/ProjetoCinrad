@@ -30,10 +30,4 @@
     <ProjectReference Include="..\Cinrad.Service\Cinrad.Service.csproj" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="wwwroot\css\plugins\" />
-    <Folder Include="wwwroot\css\patterns\" />
-  </ItemGroup>
-
 </Project>

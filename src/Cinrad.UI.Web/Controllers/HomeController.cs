@@ -10,15 +10,19 @@ namespace Cinrad.UI.Web.Controllers
     public class HomeController : BaseController
     {
 
-
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
+       
+        [HttpGet]
+        public IActionResult Pedidos()
+        {      
+            return View();
+        }
 
-        [Authorize("RequireSuperUserRole")]
         [HttpPost]
         public IActionResult Pedidos(PedidoViewModel model, string returnUrl = null)
         {

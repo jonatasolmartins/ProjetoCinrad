@@ -5,11 +5,7 @@ namespace Cinrad.Service.ViewModels
 {
     public class TransportadoraViewModel
     {
-        public Guid Id { get; set; }
-
-        [Display(Name = "Código")]
-        [MaxLength(50)]
-        public Guid? Codigo { get; set; }
+        public Guid Id { get; set; }               
 
         [Required]
         [Display(Name = "CNPJ")]

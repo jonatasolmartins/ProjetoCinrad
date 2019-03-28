@@ -50,8 +50,8 @@ namespace Cinrad.Service.Services
 
         public IList<ClienteViewModel> ObterTodos()
         {
-            return _mapper.Map<List<ClienteViewModel>>(_unitOfWork.ClienteRepository.ObterTodos());
-        }
+            return _mapper.Map<IList<ClienteViewModel>>(_unitOfWork.ClienteRepository.ObterTodos());
+        }      
 
         public bool Remover(ClienteViewModel cliente)
         {
@@ -69,5 +69,11 @@ namespace Cinrad.Service.Services
             _unitOfWork.ClienteRepository.Remover(id);
             return _unitOfWork.Save() > 0;
         }
+
+        public IList<TransportadoraViewModel> ListarTransportadoras(Guid clienteId)
+        {
+           return _mapper.Map<IList<TransportadoraViewModel>>(_unitOfWork.ClienteTransportadoraRepository.Listar(clienteId));           
+        }
+
     }
 }

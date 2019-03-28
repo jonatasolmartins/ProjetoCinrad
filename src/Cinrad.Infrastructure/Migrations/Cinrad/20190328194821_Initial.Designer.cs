@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cinrad.Infrastructure.Migrations.Cinrad
 {
     [DbContext(typeof(CinradContext))]
-    [Migration("20190326195524_AddClienteTransportadora")]
-    partial class AddClienteTransportadora
+    [Migration("20190328194821_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,10 +50,6 @@ namespace Cinrad.Infrastructure.Migrations.Cinrad
                         .IsRequired()
                         .HasColumnName("Cnpj")
                         .HasMaxLength(14);
-
-                    b.Property<Guid>("Codigo")
-                        .HasColumnName("codigo")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("NomeFantasia")
                         .HasColumnName("NomeFantasia")
@@ -133,10 +129,6 @@ namespace Cinrad.Infrastructure.Migrations.Cinrad
                         .IsRequired()
                         .HasColumnName("Cnpj")
                         .HasMaxLength(14);
-
-                    b.Property<Guid>("Codigo")
-                        .HasColumnName("codigo")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("NomeFantasia")
                         .HasColumnName("NomeFantasia")

@@ -9,7 +9,7 @@ namespace Cinrad.Infrastructure.Repository
         private readonly UsuarioRepository _usuarioRepository;
         private readonly ClienteRepository _clienteRepository;
         private readonly TransportadoraRepository _transportadoraRepository;
-
+        private readonly ClienteTransportadoraRepository _clienteTransportadoraRepository;
         public UnitOfWork(CinradContext context)
         {
             _context = context;
@@ -38,6 +38,15 @@ namespace Cinrad.Infrastructure.Repository
                 return _transportadoraRepository ?? new TransportadoraRepository(_context);
             }
         }
+
+        public ClienteTransportadoraRepository ClienteTransportadoraRepository
+        {
+            get
+            {
+                return _clienteTransportadoraRepository ?? new ClienteTransportadoraRepository(_context);
+            }
+        }
+       
 
         public int Save()
         {

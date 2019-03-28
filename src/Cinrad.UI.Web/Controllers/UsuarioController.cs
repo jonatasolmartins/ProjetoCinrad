@@ -77,7 +77,7 @@ namespace Cinrad.UI.Web.Controllers
 
             ViewBag.Transportadoras = new SelectList(Service.TransportadorService.ObterTodos(), "Id", "RazaoSocial");
             ViewBag.Clientes = new SelectList(Service.ClienteService.ObterTodos(), "Id", "RazaoSocial");
-            ViewBag.Id = user.Id;
+            //ViewBag.Id = user.Id;
 
             return PartialView(user);
         }

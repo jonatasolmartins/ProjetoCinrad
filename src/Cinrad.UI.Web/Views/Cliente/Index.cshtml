@@ -1,4 +1,4 @@
-﻿@model Cinrad.Service.ViewModels.ClienteViewModel;
+﻿@model IList<Cinrad.Service.ViewModels.ClienteViewModel>
 @{
     ViewData["Title"] = "RegistrarCliente";
 }
@@ -70,50 +70,51 @@
 
                             </div>
                         </div>
-                        @*<div id="modal-transportadora" class="modal fade">
+                        <div id="modal-transportadora" class="modal fade">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     @await Html.PartialAsync("ClienteTransportadoraModal");
                                 </div>
                             </div>
-                        </div>*@
+                        </div>
 
                         <div class="table-responsive">
-                            @foreach (var cliente in ViewBag.Clientes)
-                            {
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Código</th>
-                                            <th>CNPJ</th>
-                                            <th>Razão Social</th>
-                                            <th> Nome Fantasia</th>
-                                            <th> Telefone</th>
-                                            <th> Site</th>
-                                            <th colspan="4">Açoes</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>@cliente.Codigo</td>
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>                                       
+                                        <th>CNPJ</th>
+                                        <th>Razão Social</th>
+                                        <th> Nome Fantasia</th>
+                                        <th> Telefone</th>
+                                        <th> Site</th>
+                                        <th colspan="4">Açoes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var cliente in ViewBag.Clientes)
+                                    {
+                                        <tr>                                            
                                             <td>@cliente.Cnpj</td>
                                             <td>@cliente.RazaoSocial</td>
                                             <td>@cliente.Telefone</td>
-                                            <td>@cliente.Site</td>                                            
-                                            <td><a asp-action="RemoverModal" asp-controller="Usuario" asp-route-id="@cliente.Id" data-toggle="modal" data-target="#confirmRemoverModal" title="Remover"><h2> <i class="fa fa-trash"></i></h2></a></td>
+                                            <td>@cliente.Site</td>
+                                            <td><a asp-action="RemoverModal" asp-controller="Cliente" asp-route-id="@cliente.Id" data-toggle="modal" data-target="#confirmRemoverModal" title="Remover"><h2> <i class="fa fa-trash"></i></h2></a></td>
                                             <td><a asp-action="EditarModal" asp-controller="Cliente" asp-route-id="@cliente.Id" data-toggle="modal" data-target="#modal-edit" title="Editar"><h2><i class="fa fa-edit "></i></h2></a></td>
-                                            <td><a asp-action="ClienteTransportadoraModal" asp-controller="Cliente" data-target="#modal-transportadora" data-toggle="modal"><h2><i class="fa fa-users "></i></h2></a>
+                                            <td><a asp-action="ClienteTransportadoraModal" asp-controller="Cliente" asp-route-id="@cliente.Id" data-target="#modal-transportadora" data-toggle="modal" title="Associar Transportadora"><h2><i class="fa fa-users "></i></h2></a>
                                         </tr>
-                                    </tbody>
-                                </table>
-                            }
+                                    }
+                                </tbody>
+
+                            </table>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>   
-   
+    </div>
+
 </div>
 <script src="js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
 
