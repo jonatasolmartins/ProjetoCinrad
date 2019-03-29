@@ -23,7 +23,8 @@ namespace Cinrad.Infrastructure.CrossCutting.Identity
             {                
                 await _userManager.AddToRoleAsync(applicationUser, role);
                 ApplicationUser user = await _userManager.FindByNameAsync(applicationUser.UserName);
-                return user.Id;
+                var id =  user.Id;
+                return id;
             }
             return Guid.Empty;
         }

@@ -18,8 +18,7 @@ namespace Cinrad.Infrastructure.CrossCutting.Identity
                 new ApplicationRole("Admin","Usuário Administrador"),
                 new ApplicationRole("Cliente","Usuário Cliente"),
                 new ApplicationRole("Transportador","Usuário Transportadora"),
-                new ApplicationRole("Supervisor","Usuário Supervisor"),
-                new ApplicationRole("PowerUser","Super Powerfull User"),
+                new ApplicationRole("Supervisor","Usuário Supervisor"),                
                 new ApplicationRole("Diretor", "Usuário Diretor")
             };
 
@@ -46,7 +45,7 @@ namespace Cinrad.Infrastructure.CrossCutting.Identity
                 if (createPowerUser.Succeeded)
                 {
                     // Adicionando a role PowerUser para o novo usuário 
-                    await UserManager.AddToRoleAsync(poweruser, "PowerUser");
+                    await UserManager.AddToRoleAsync(poweruser, "Admin");
                 }
             }
         }

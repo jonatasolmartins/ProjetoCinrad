@@ -31,12 +31,12 @@ namespace Cinrad.Infrastructure.EntityConfig.Map
 
             builder.Property(c => c.Celular)                
                 .HasColumnName("Celular")
-                .HasMaxLength(9)
+                .HasMaxLength(11)
                 .IsRequired(false);
             
             builder.Property(c => c.Telefone)                
                 .HasColumnName("Telefone")
-                .HasMaxLength(8)
+                .HasMaxLength(20)
                 .IsRequired(false);
             
             builder.Property(c => c.IsDeleted)
