@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace Cinrad.UI.Web.Controllers
 {
-    [Authorize("RequireSuperUserRole")]
+    [Authorize("RequireAdminRole")]
     public class HomeController : BaseController
     {
 

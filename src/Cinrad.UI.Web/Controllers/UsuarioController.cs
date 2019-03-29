@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cinrad.UI.Web.Controllers
 {
-    [Authorize("RequireSuperUserRole")]
+    [Authorize("RequireAdminRole")]
     public class UsuarioController : BaseController
     {
 

@@ -6,7 +6,7 @@ using System;
 
 namespace Cinrad.UI.Web.Controllers
 {
-    [Authorize("RequireSuperUserRole")]
+    [Authorize("RequireAdminRole")]
     public class ClienteController : BaseController
     {
         // GET: Cliente
