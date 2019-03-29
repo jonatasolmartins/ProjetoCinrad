@@ -1,4 +1,4 @@
-﻿
+﻿@model Cinrad.Service.ViewModels.ClienteTransportadoraViewModel
 <div class="modal-header">
     <h4 class="modal-title">Transportadoras autorizadas</h4>
 </div>
@@ -7,36 +7,47 @@
         <div>
             <form role="form" asp-action="AssociarTransportadora" asp-controller="Cliente" method="post">
                 <div hidden>
-                    <input id="ClienteId" value="@ViewBag.Id" />
+                    <input asp-for="ClienteId" value="@ViewBag.Id" />
                 </div>
-                @*<div class="form-group">
+                <div class="form-group">
                     <div class="input-group">
-                        <select asp-for="" asp-items="@ViewBag.Transportadoras" class="form-control m-b" name="account">
+                        <select asp-for="TransportadoraId" asp-items="@ViewBag.Transportadoras" class="form-control m-b">
                             <option value="">--Nenhum--</option>
                         </select>
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn btn-white"> <i class="fa fa-arrow-down"></i> Adicionar</button>
                         </span>
                     </div>
-                </div>*@
-                <div class="form-group">
-                    <table class="table table-sm table-striped">
-                        <tbody>
+                </div>
+            </form>
+            <div class="form-group">
+                <table class="table table-sm table-striped">
+                    <tbody>
+                        @if (ViewBag.ClienteTransportadora != null)
+                        {
+
                             @foreach (var transportadora in ViewBag.ClienteTransportadora)
                             {
                                 <tr>
-                                    <td>@transportadora.RazaoSocial</td>
-                                    <td><a asp-action="RemoverTransportadora" asp-controller="Cliente" asp-route-Id="@transportadora.Id" data-toggle="modal" title="Remover"><i class="fa fa-trash"></i></a></td>
+                                    <td>@transportadora.Text</td>
+                                    <td><a asp-action="RemoverTransportadora" asp-controller="Cliente" asp-route-Id="@transportadora.Value" data-toggle="modal" title="Remover"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                             }
-                        </tbody>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">Fechar</button>
-                    @*<button type="submit" class="btn btn-primary">Salvar</button>*@
-                </div>
-            </form>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Fechar</button>
+                @*<button type="submit" class="btn btn-primary">Salvar</button>*@
+            </div>
+
         </div>
     </div>
 </div>
