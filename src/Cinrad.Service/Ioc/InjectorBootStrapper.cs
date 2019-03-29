@@ -12,6 +12,7 @@ namespace Cinrad.Service.Ioc
             services.AddTransient<IUsuarioService, UsuarioService>();
             services.AddTransient<IClienteService, ClienteService>();
             services.AddTransient<ITransportadorService, TransportadorService>();
+            services.AddTransient<IClienteTransportadora, ClienteTransportadoraService>();
 
         }
 
