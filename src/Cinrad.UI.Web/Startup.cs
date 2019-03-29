@@ -73,9 +73,9 @@ namespace Cinrad.UI.Web
 
             services.AddAuthorization(options =>
             {
+                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
                 options.AddPolicy("RequireClienteUserRole", policy => policy.RequireRole("Cliente"));
                 options.AddPolicy("RequireTransportadoraUserRole", policy => policy.RequireRole("Transportadora"));
-                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
             });
 
             // Roles e super admin
