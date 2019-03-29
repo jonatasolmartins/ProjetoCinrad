@@ -37,8 +37,9 @@ namespace Cinrad.UI.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
 
             if (ModelState.IsValid)
-            {
-                var user = await _userManager.FindByEmailAsync(model.Email);
+            {                
+                var user = await _userManager.FindByNameAsync(model.UserName);
+
                 var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, false);
                 if (result.Succeeded)          
                 {                   

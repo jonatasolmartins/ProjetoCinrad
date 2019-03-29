@@ -49,12 +49,13 @@ namespace Cinrad.UI.Web
             //Configuração da senha de usuário
             services.Configure<IdentityOptions>(options =>
             {
-                options.Password.RequireDigit = true;
-                options.Password.RequiredLength = 8;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 11;
                 options.Password.RequiredUniqueChars = 4;
-                options.Password.RequireLowercase = true;
+                options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = true;
+                options.Password.RequireUppercase = false;
+                options.User.RequireUniqueEmail = false;                
             });
 
             services.ConfigureApplicationCookie(options =>
@@ -107,7 +108,7 @@ namespace Cinrad.UI.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Account}/{action=Login}/{id?}");
             });
         }
 

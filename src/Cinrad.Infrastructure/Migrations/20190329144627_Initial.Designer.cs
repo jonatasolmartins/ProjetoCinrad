@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cinrad.Infrastructure.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20190328194723_Initial")]
+    [Migration("20190329144627_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,6 +71,8 @@ namespace Cinrad.Infrastructure.Migrations
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
+
+                    b.Property<string>("Password");
 
                     b.Property<string>("PasswordHash");
 

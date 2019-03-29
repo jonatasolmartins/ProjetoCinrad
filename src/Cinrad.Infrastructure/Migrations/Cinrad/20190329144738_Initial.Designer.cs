@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cinrad.Infrastructure.Migrations.Cinrad
 {
     [DbContext(typeof(CinradContext))]
-    [Migration("20190328194821_Initial")]
+    [Migration("20190329144738_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

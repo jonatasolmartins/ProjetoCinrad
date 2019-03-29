@@ -39,7 +39,7 @@ namespace Cinrad.Infrastructure.CrossCutting.Identity
                 Email = Configuration.GetSection("AppSettings")["UserEmail"]
             };
             string userPassword = Configuration.GetSection("AppSettings")["UserPassword"];
-            ApplicationUser user = await UserManager.FindByEmailAsync(Configuration.GetSection("AppSettings")["UserEmail"]);
+            ApplicationUser user = await UserManager.FindByNameAsync(Configuration.GetSection("AppSettings")["UserName"]);            
             if (user == null)
             {
                 IdentityResult createPowerUser = await UserManager.CreateAsync(poweruser, userPassword);

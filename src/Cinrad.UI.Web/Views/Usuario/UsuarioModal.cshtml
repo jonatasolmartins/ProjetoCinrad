@@ -17,6 +17,11 @@
                     <span asp-validation-for="Nome" class="text-danger"></span>
                 </div>
                 <div class="form-group">
+                    <label asp-for="UserName"></label>
+                    <input asp-for="UserName" placeholder="Nome de Usuário" type="text" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="Email"></label>
                     <input asp-for="Email" placeholder="Email" type="email" class="form-control" />
                     <span asp-validation-for="Email" class="text-danger"></span>
@@ -40,13 +45,13 @@
                 <div class="form-group">
                     <label class="font-noraml">Perfil</label>
                     <div class="input-group">
-                        <select name="perfil" asp-items="Html.GetEnumSelectList(typeof(Cinrad.Service.Enums.PerfilEnum))"></select>
+                        <select name="perfil" asp-items="Html.GetEnumSelectList(typeof(Cinrad.Service.Enums.PerfilEnum))" class="chosen-select" style="width:350px;" tabindex="4"></select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="font-noraml">Cliente</label>
                     <div class="input-group">
-                        <select asp-for="ClienteId" asp-items="@ViewBag.Clientes">
+                        <select asp-for="ClienteId" asp-items="@ViewBag.Clientes" class="chosen-select" style="width:350px;" tabindex="4">
                             <option value="">--Nenhum--</option>
                         </select>
                     </div>
@@ -55,7 +60,7 @@
                 <div class="form-group">
                     <label class="font-noraml">Transportador</label>
                     <div class="input-group">
-                        <select asp-for="TransportadoraId" asp-items="@ViewBag.Transportadoras">
+                        <select asp-for="TransportadoraId" asp-items="@ViewBag.Transportadoras" class="chosen-select" style="width:350px;" tabindex="4">
                             <option value="">--Nenhum--</option>
                         </select>
                     </div>

@@ -9,6 +9,11 @@ namespace Cinrad.Service.ViewModels
         public Guid Id { get; set; }
 
         [Required]
+        [Display(Name = "Nome de Usuário")]        
+        [MaxLength(30)]
+        public string UserName { get; set; }
+
+        [Required]
         [Display(Name = "Nome")]
         [MaxLength(30)]
         public string Nome { get; set; }
@@ -25,11 +30,13 @@ namespace Cinrad.Service.ViewModels
         public string CPF { get; set; }
 
         [Display(Name = "Celular")]
-        [MaxLength(9)]
+        [MaxLength(11)]
+        [Phone]
         public string Celular { get; set; }
 
         [Display(Name = "Telefone")]
-        [MaxLength(8)]
+        [MaxLength(20)]
+        [Phone]
         public string Telefone { get; set; }       
 
         [Display(Name = "ClienteId")]

@@ -4,10 +4,10 @@ namespace Cinrad.UI.Web.Models.AccountViewModels
 {
     public class LoginViewModel
     {
+
         [Required]
-        [EmailAddress]
-        [Display(Name = "E-Mail")]
-        public string Email { get; set; }
+        [Display(Name = "Nome de Usuário")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

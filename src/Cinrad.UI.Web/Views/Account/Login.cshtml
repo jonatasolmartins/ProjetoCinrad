@@ -7,14 +7,14 @@
 <div class="row"  style="align-content:center" >
     <div class="col-md-4" >
         <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-            <h4>Insira o e-mail e senha para entrar no sistema</h4>
+            <h4>Insira o nome de usuáro e senha para entrar no sistema</h4>
             <hr />
             <div class="text-danger" asp-validation-summary="All"></div>
 
             <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <label asp-for="UserName"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
