@@ -36,8 +36,9 @@ namespace Cinrad.Service.Services
         public bool Remover(ClienteTransportadoraViewModel clienteTransportadora)
         {
             var clientetransp = _mapper.Map<ClienteTransportadora>(clienteTransportadora);
-            if (clientetransp.Cliente == null && clientetransp.Transportadora == null)
+            if (clientetransp.ClienteId == null && clientetransp.TransportadoraId == null)
                 return false;
+
             _unitOfWork.ClienteTransportadoraRepository.Remover(clientetransp);
 
             return _unitOfWork.Save() > 0;

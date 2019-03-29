@@ -67,6 +67,17 @@ namespace Cinrad.UI.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        public IActionResult RemoverTransportadora(ClienteTransportadoraViewModel clienteTransportadora)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Service.ClienteTransportadora.Remover(clienteTransportadora))
+                    return RedirectToAction(nameof(Index));                
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
 
         #region Partial
         [HttpGet]

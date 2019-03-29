@@ -30,7 +30,7 @@
                             {
                                 <tr>
                                     <td>@transportadora.Text</td>
-                                    <td><a asp-action="RemoverTransportadora" asp-controller="Cliente" asp-route-Id="@transportadora.Value" data-toggle="modal" title="Remover"><i class="fa fa-trash"></i></a></td>
+                                    <td><a asp-action="RemoverTransportadora" asp-controller="Cliente" asp-route-TransportadoraId="@transportadora.Value" asp-route-ClienteId="@ViewBag.Id" data-toggle="modal" title="Remover"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                             }
                         }
@@ -44,8 +44,7 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Fechar</button>
-                @*<button type="submit" class="btn btn-primary">Salvar</button>*@
+                <button type="button" class="btn btn-white" data-dismiss="modal">Fechar</button>               
             </div>
 
         </div>
