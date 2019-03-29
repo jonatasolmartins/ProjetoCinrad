@@ -68,12 +68,7 @@ namespace Cinrad.Service.Services
         {
             _unitOfWork.ClienteRepository.Remover(id);
             return _unitOfWork.Save() > 0;
-        }
-
-        public IList<TransportadoraViewModel> ListarTransportadoras(Guid clienteId)
-        {
-           return _mapper.Map<IList<TransportadoraViewModel>>(_unitOfWork.ClienteTransportadoraRepository.Listar(clienteId));           
-        }
+        }        
 
     }
 }

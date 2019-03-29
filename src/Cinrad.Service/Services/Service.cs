@@ -11,15 +11,19 @@ namespace Cinrad.Service.Services
         private readonly IUsuarioService _usuarioService;
         private readonly IClienteService _clienteService;
         private readonly ITransportadorService _transportadorService;
+        private readonly IClienteTransportadora _clienteTransportadora;
 
-
-        public Service(IUnitOfWork unitOfWork, IMapper mapper, IUsuarioService usuarioService, IClienteService clienteService, ITransportadorService transportadorService)
+        public Service(
+            IUnitOfWork unitOfWork, IMapper mapper, IUsuarioService usuarioService,
+            IClienteService clienteService, ITransportadorService transportadorService,
+            IClienteTransportadora clienteTransportadora)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _usuarioService = usuarioService;
             _clienteService = clienteService;
             _transportadorService = transportadorService;
+            _clienteTransportadora = clienteTransportadora;
         }
 
         public IUsuarioService UsuarioService => _usuarioService;
@@ -27,5 +31,7 @@ namespace Cinrad.Service.Services
         public IClienteService ClienteService => _clienteService;
 
         public ITransportadorService TransportadorService => _transportadorService;
+
+        public IClienteTransportadora ClienteTransportadora => _clienteTransportadora;
     }
 }
