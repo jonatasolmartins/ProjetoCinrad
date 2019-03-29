@@ -38,7 +38,8 @@ namespace Cinrad.UI.Web.Controllers
         {
             if(ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                if (!Service.ClienteTransportadora.Adicionar(clienteTransportadora))
+                    ModelState.AddModelError(string.Empty, "Erro ao associar Transportador");
             }
             return RedirectToAction(nameof(Index));
         }
@@ -83,7 +84,7 @@ namespace Cinrad.UI.Web.Controllers
 
             ViewBag.Transportadoras = new SelectList(Service.TransportadorService.ObterTodos(), "Id", "RazaoSocial");
             ViewBag.Id = cliente.Id;
-            ViewBag.ClienteTransportadora = new SelectList(Service.ClienteService.ListarTransportadoras(id), "Id", "TransportadoraId");
+            ViewBag.ClienteTransportadora = new SelectList(Service.ClienteTransportadora.ListarTransportadoras(id), "Id", "RazaoSocial");
             return PartialView();
         }
 
