@@ -11,7 +11,6 @@ namespace Cinrad.Service.Interface
         bool Remover(ClienteViewModel cliente);
         bool Remover(Guid id);
         ClienteViewModel ObterPorId(Guid id);
-        IList<ClienteViewModel> ObterTodos();
-        IList<TransportadoraViewModel> ListarTransportadoras(Guid clienteId);
+        IList<ClienteViewModel> ObterTodos();        
     }
 }
