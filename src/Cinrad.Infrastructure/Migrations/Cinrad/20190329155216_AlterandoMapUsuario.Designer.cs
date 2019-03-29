@@ -4,14 +4,16 @@ using Cinrad.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Cinrad.Infrastructure.Migrations.Cinrad
 {
     [DbContext(typeof(CinradContext))]
-    partial class CinradContextModelSnapshot : ModelSnapshot
+    [Migration("20190329155216_AlterandoMapUsuario")]
+    partial class AlterandoMapUsuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
