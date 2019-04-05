@@ -8,7 +8,7 @@ namespace Cinrad.Core.Entity
         {
             Nome = nome;
             Email = email;
-            IsDeleted = false;
+            IsAtivo = true;
         }            
         
         protected Usuario(){}
@@ -23,7 +23,7 @@ namespace Cinrad.Core.Entity
         public string CPF { get; private set; }
         public string Celular { get; private set; }
         public string Telefone { get; private set; }
-        public bool IsDeleted { get; set; }
+        public bool IsAtivo { get; set; }
         public Guid? ClienteId { get; set; }
         public virtual Cliente Cliente { get; set; }
         public Guid? TransportadoraId { get; set; }

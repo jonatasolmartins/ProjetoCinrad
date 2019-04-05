@@ -46,7 +46,7 @@ namespace Cinrad.Service.ViewModels
         public Guid? TransportadoraId { get; set; }
 
         [Display(Name = "Ativar/Desativar Cadastro")]
-        public bool IsDeleted { get; set; } 
+        public bool IsAtivo { get; set; } 
 
         [Display(Name = "Cliente")]
         public ClienteViewModel Cliente { get; set; }

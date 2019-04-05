@@ -39,7 +39,7 @@ namespace Cinrad.Infrastructure.EntityConfig.Map
                 .HasMaxLength(20)
                 .IsRequired(false);
             
-            builder.Property(c => c.IsDeleted)
+            builder.Property(c => c.IsAtivo)
                 .HasColumnName("Ativo")
                 .IsRequired();
             

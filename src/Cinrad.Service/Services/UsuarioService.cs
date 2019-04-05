@@ -37,7 +37,7 @@ namespace Cinrad.Service.Services
             var role = (PerfilEnum)perfil;
 
             //Criando Usuário na tabela Identity 
-            var userId = await _identityRepository.CreateAsync(_mapper.Map<ApplicationUser>(usuario), role.ToString());
+            Guid userId = await _identityRepository.CreateAsync(_mapper.Map<ApplicationUser>(usuario), role.ToString());
             if (userId == Guid.Empty)
                 return false;
 

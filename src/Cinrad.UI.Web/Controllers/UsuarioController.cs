@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cinrad.UI.Web.Controllers
@@ -12,9 +13,10 @@ namespace Cinrad.UI.Web.Controllers
     {
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(bool status = true)
         {
-            ViewBag.Usuarios = Service.UsuarioService.ObterTodos();
+            var users = Service.UsuarioService.ObterTodos();
+            ViewBag.Usuarios = users.Where(c => c.IsAtivo = status).ToList();
 
             return View();
         }
