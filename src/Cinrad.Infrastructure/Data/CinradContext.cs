@@ -59,15 +59,15 @@ namespace Cinrad.Infrastructure.Data
 
                     //Modifica a propiedade IsDeleted da entidade para true.
                     //Será operado um soft delete aqui
-                    entity.IsAtivo = true; 
+                    entity.IsAtivo = false; 
 
                     //Marca a entidade para ser atualizada
-                    if (item.State != EntityState.Modified)
-                    {                       
-                        //Apartir deste ponto a entidade passa a ser marcada como Modified(To be Updated)
-                        item.State = EntityState.Modified;
-                        entity.IsAtivo = true;
-                    }                
+                    //if (item.State != EntityState.Modified)
+                    //{                       
+                    //    //Apartir deste ponto a entidade passa a ser marcada como Modified(To be Updated)
+                    item.State = EntityState.Modified;
+                    //    entity.IsAtivo = true;
+                    //}                
                     
                 }
             }
