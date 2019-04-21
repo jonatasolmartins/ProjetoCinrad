@@ -1,0 +1,116 @@
+﻿@model IList<Cinrad.Service.ViewModels.ProdutoViewModel>
+
+@{
+    ViewData["Title"] = "Produto";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Produto</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a asp-area="" asp-controller="Produto" asp-action="Index">Home</a>
+            </li>
+            <li class="active">
+                <strong>Registrar Produto</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-18">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <input type="text" placeholder="Buscar Produto " class="input form-control">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn btn-white"> <i class="fa fa-search"></i> Buscar</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 ">
+                            <div class="input-group">
+                                <select name="status" id="status" class="input form-control btn-white">
+                                    <option value="1" selected>Ativo</option>
+                                    <option value="0">Inativo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products-list ">
+                        <span class="input-group-btn">
+                            <a asp-action="ClienteModal" asp-controller="Produto" class="btn btn-primary" data-target="#modal-form" data-toggle="modal"> Novo</a>
+                        </span>
+                        <div id="modal-form" class="modal fade" aria-hidden="true" data-backdrop="false" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    @await Html.PartialAsync("ProdutoModal");
+                                </div>
+                            </div>
+                        </div>
+                        <div id="modal-edit" class="modal fade" aria-hidden="true" data-backdrop="false" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    @await Html.PartialAsync("EditarModal");
+                                </div>
+                            </div>
+                        </div>
+                        <div id="confirmRemoverModal" class="modal fade">
+                            <div class="modal-dialog modal-confirm">
+                                <div class="modal-content">
+                                    @await Html.PartialAsync("RemoverModal");
+                                </div>
+
+                            </div>
+                        </div>
+                        @*<div id="modal-transportadora" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    @await Html.PartialAsync("ClienteTransportadoraModal");
+                                </div>
+                            </div>
+                        </div>*@
+
+                        <div class="table-responsive">
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        @*<th>CNPJ</th>
+                                        <th>Razão Social</th>
+                                        <th> Telefone</th>
+                                        <th> Site</th>*@
+                                        <th colspan="4">Açoes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var produto in ViewBag.Produtos)
+                                    {
+                                        <tr>
+                                            @*<td>@cliente.Cnpj</td>
+                                            <td>@cliente.RazaoSocial</td>
+                                            <td>@cliente.Telefone</td>
+                                            <td>@cliente.Site</td>*@
+                                            <td><a asp-action="RemoverModal" asp-controller="Produto" asp-route-id="@produto.Id" data-toggle="modal" data-target="#confirmRemoverModal" title="Remover"><h2> <i class="fa fa-trash"></i></h2></a></td>
+                                            <td><a asp-action="EditarModal" asp-controller="Produto" asp-route-id="@produto.Id" data-toggle="modal" data-target="#modal-edit" title="Editar"><h2><i class="fa fa-edit "></i></h2></a></td>
+                                            @*<td><a asp-action="ClienteTransportadoraModal" asp-controller="Cliente" asp-route-id="@produto.Id" data-target="#modal-transportadora" data-toggle="modal" title="Associar Transportadora"><h2><i class="fa fa-users "></i></h2></a>*@
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
