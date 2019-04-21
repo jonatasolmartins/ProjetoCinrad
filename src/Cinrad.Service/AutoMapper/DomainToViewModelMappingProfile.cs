@@ -10,7 +10,8 @@ namespace Cinrad.Service.AutoMapper
         {
             CreateMap<Usuario, UsuarioViewModel>();                
             CreateMap<Cliente, ClienteViewModel>();
-            CreateMap<Transportadora, TransportadoraViewModel>();           
+            CreateMap<Transportadora, TransportadoraViewModel>();
+            CreateMap<Produto, ProdutoViewModel>();
         }
     }
 }

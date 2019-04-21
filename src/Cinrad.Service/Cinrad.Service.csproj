@@ -438,6 +438,7 @@
     <Compile Include="Enums\PerfilEnum.cs" />
     <Compile Include="Interface\IClienteService.cs" />
     <Compile Include="Interface\IClienteTransportadora.cs" />
+    <Compile Include="Interface\IProdutoService.cs" />
     <Compile Include="Interface\IService.cs" />
     <Compile Include="Interface\ITransportadorService.cs" />
     <Compile Include="Interface\IUsuarioService.cs" />
@@ -445,6 +446,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ClienteService.cs" />
     <Compile Include="Services\ClienteTransportadoraService.cs" />
+    <Compile Include="Services\ProdutoService.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\TransportadorService.cs" />
     <Compile Include="Services\UsuarioService.cs" />
