@@ -3,6 +3,9 @@
     ViewData["Title"] = "Usuarios";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@{
+    var status = true;
+}
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -36,7 +39,7 @@
                         </div>
                         <div class="col-sm-2 ">
                             <div class="input-group">
-                                <select name="status" id="status" class="input form-control btn-white" onchange="FiltrarRegistros()">
+                                <select name="status" id="status" class="input form-control btn-white" onselect="FiltrarRegistros()">
                                     <option value="1">Ativo</option>
                                     <option value="0">Inativo</option>
                                 </select>
@@ -127,29 +130,34 @@
             </div>
         </div>
     </div>
+</div>
 
-    <script>
+<script>
+    var option = $('#status').val()
+    @status = option;
+    $("#status option[value='@status == @true ? "Ativo" : "Inativo"']").prop('selected', true);
 
-        function FiltrarRegistros() {
-            var status = $('#status').val()            
-            $.ajax({
-                url: '/Usuario/Index',
-                type: 'GET',
-                data: {
-                    Status: (status == 0 ? false : true)
-                },
-                headers: {
-                    RequestVerificationToken:
-                        $('input:hidden[name="__RequestVerificationToken"]').val()
-                }
+    function FiltrarRegistros() {      
+        var option = $('#status').val()
+        @status = option;
+        
+        $.ajax({
+            url: '/Usuario/Index',
+            type: 'GET',
+            data: {
+                Status: (option == "0" ? false : true)
+            },
+            headers: {
+                RequestVerificationToken:
+                    $('input:hidden[name="__RequestVerificationToken"]').val()
+            }
+        })
+            .done(function (result) {
+                location.reload();
             })
-                .done(function (result) {
-                    console.log(result);
-                    $('#user-table').html();
-                })
-        }
-                //$('#modal-form').data('modal', null);
-                //$('#modal-edit').data('modal', null);
-                //$('#confirmRemoverModal').data('modal', null);
+    }
+        //$('#modal-form').data('modal', null);
+        //$('#modal-edit').data('modal', null);
+        //$('#confirmRemoverModal').data('modal', null);
 
-    </script>
+</script>
