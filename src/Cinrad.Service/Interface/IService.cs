@@ -7,5 +7,7 @@
         ITransportadorService TransportadorService { get; }
         IClienteTransportadora ClienteTransportadora { get; }
 
+        IProdutoService ProdutoService { get; }
+
     }
 }
