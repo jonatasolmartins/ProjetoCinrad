@@ -16,7 +16,7 @@ namespace Cinrad.UI.Web.Controllers
         public IActionResult Index(bool status = true)
         {
             var users = Service.UsuarioService.ObterTodos();
-            ViewBag.Usuarios = users.Where(c => c.IsAtivo = status).ToList();
+            ViewBag.Usuarios = users.Where(c => c.IsAtivo == status).ToList();
 
             return View();
         }
@@ -36,18 +36,27 @@ namespace Cinrad.UI.Web.Controllers
             return RedirectToAction(nameof(Index), ModelState);
         }
 
+        [HttpGet]
+       // [ValidateAntiForgeryToken]
+        public IActionResult Perfil(Guid id)
+        {
+            var user = Service.UsuarioService.ObterPorId(id);
+
+            return View(user);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Editar(UsuarioViewModel usuario)
+        public IActionResult Editar(UsuarioViewModel usuario, string newpassw, string newpassw2)
         {
             if (ModelState.IsValid)
             {
-                var result = Service.UsuarioService.Atualizar(usuario);
-                if (!result)
-                    ModelState.AddModelError(string.Empty, "Falha ao atualizar cadastro!");
+                //var result = Service.UsuarioService.Atualizar(usuario);
+                //if (!result)
+                //    ModelState.AddModelError(string.Empty, "Falha ao atualizar cadastro!");
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Perfil), usuario);
         }
 
         [HttpGet]

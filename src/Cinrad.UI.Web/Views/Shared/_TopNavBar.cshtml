@@ -59,7 +59,7 @@
                     </ul>
                 </li>*@
                 <li>
-                    <a asp-area="" asp-controller="Home" asp-action="#" style=" color: white">@UserManager.GetUserName(User)</a>
+                    <a asp-area="" asp-controller="Usuario" asp-action="Perfil" asp-route-id="@UserManager.GetUserId(User)" style=" color: white">@UserManager.GetUserName(User)</a>
                 </li>
                 <li>
                     <a asp-area="" asp-controller="Account" asp-action="Logout" style=" color: white"><i class="fa fa-sign-out"></i> <span class="nav-label">Sair</span></a>
