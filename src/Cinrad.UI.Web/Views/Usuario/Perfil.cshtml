@@ -1,4 +1,8 @@
 ﻿@model Cinrad.Service.ViewModels.UsuarioViewModel
+@{
+    Cinrad.UI.Web.Models.AccountViewModels.RegisterViewModel register = new RegisterViewModel();
+}
+
 @inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "Perfil";
@@ -17,71 +21,53 @@
             </li>
         </ol>
     </div>
-    <div class="col-lg-2">
-    </div>
+
 </div>
 <div class="wrapper wrapper-content  animated fadeInRight">
+    <div id="modal-edit" class="modal fade" aria-hidden="true" data-backdrop="false" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                @await Html.PartialAsync("PerfilModal");
+            </div>
+        </div>
+    </div>
     <div style="display:flex; flex-direction:row;">
 
-        <div style="flex:40">
-            <form role="form" asp-area="" asp-controller="Usuario" asp-action="Editar" style="align-content:center" method="post">
-                <div class="text-danger" asp-validation-summary="All"></div>
-                <div hidden>
-                    <input asp-for="Id" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="Nome"></label>
-                    <input asp-for="Nome" placeholder="nome" type="text" disabled class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="UserName"></label>
-                    <input asp-for="UserName" placeholder="Nome de Usuário" type="text" class="form-control" />
-                    <span asp-validation-for="UserName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email"></label>
-                    <input asp-for="Email" placeholder="email" type="email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CPF"></label>
-                    <input asp-for="CPF" placeholder="CPF" type="number" class="form-control" />
-                    <span asp-validation-for="CPF" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Celular"></label>
-                    <input asp-for="Celular" placeholder="Celular" type="tel" class="form-control" />
-                    <span asp-validation-for="Celular" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Telefone"></label>
-                    <input asp-for="Telefone" placeholder="Telefone Coorporativo" type="tel" class="form-control" />
-                    <span asp-validation-for="Telefone" class="text-danger"></span>
-                </div>
+        <div style="flex:40; flex-direction:column;">
 
-                <div class="form-group">
-                    <label>Senha Nova</label>
-                    <input id="newpassw" placeholder="Senha Nova" type="text" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label>Repita a senha a acima</label>
-                    <input id="newpassw2" placeholder="Senha nova" type="text" class="form-control" />
-                </div>
-                <div style="align-content: center center; margin-top: 15px;">
-                    <div>
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                    </div>
-                </div>
-            </form>
+            <label asp-for="Nome"></label>
+            <input asp-for="Nome" type="text" value="@ViewBag.User.Nome" class="form-control" />
+
+            <label asp-for="Email"></label>
+            <input asp-for="Email" type="text" value="@ViewBag.User.Email" class="form-control" />
+
+            <label asp-for="CPF"></label>
+            <input asp-for="CPF" type="text" value="@ViewBag.User.CPF" class="form-control" />
+            @if (ViewBag.Cliente != null)
+            {
+                <label asp-for="Cliente.RazaoSocial"></label>
+                <input asp-for="Cliente.RazaoSocial" type="text" value="@ViewBag.User.Cliente.RazaoSocial" class="form-control" />
+            }
+
+            @if (ViewBag.Transportadora != null)
+            {
+                <label asp-for="Transportadora.RazaoSocial"></label>
+                <input asp-for="Transportadora.RazaoSocial" type="text" value="@ViewBag.User.Transportadora.RazaoSocial" class="form-control" />
+            }
+
+        <div>
+            <button  asp-action="PerfilModal" asp-controller="Usuario" asp-route-id="Id" asp-route-returnUrl="@ViewData["ReturnUrl"]" data-toggle="modal" data-target="#modal-edit" title="Editar" class="btn btn-primary">
+                Editar
+            </button>
         </div>
-        <div style="flex:60; flex-direction:column; align-content:center center">
+        </div>
+        <div style="flex:60; flex-direction:column; align-content:center center" class="white-bg">
             <div style="margin-left:15px; margin-right:15px;">
                 <div style="margin-bottom: 10px; align-content:center center">
                     <span>
-                    <img src="~/img/chat-logo.png" style="width:67px; height:67px;" />
+                        <img src="~/img/chat-logo.png" style="width:67px; height:67px;" />
                     </span>
-                </div>                
-                   
+                </div>
                 <div style="line-height: 22px; margin: 0 0 20px; align-content:center center">
                     <p>
                         Seja nosso cliente, envie e-mail para
@@ -89,28 +75,21 @@
                     <p>
                         <a target="_blank" href="#"> doses.cinrad@hc.fm.usp.br</a>
                     </p>
-
                     <p>
-
                         O Centro Integrado de Produção de Radiofármacos o Instituto de Radiologia (CinRad), foi inaugurado em maio de 2010, como o primeiro acelerador de íons negativos carregadas de grande porte instalado dentro de um complexo hospitalar e totalmente integrado a estrutura de prestação de serviço à saúde.
                     </p>
                     <p>
-
                         Equipado com cíclotron de 16,5MeV acoplada a uma beam line instalada, 2 sintetizadores FastLab, um sintetizador TracerLab MX e um sintetizador Eckert-Ziegler; e um fracionador automático de doses de radiofármacos.
                     </p>
                     <p>
-
                         A instalação possui certificação de Boas Práticas de Fabricação desde 2014. E em 2017 obteve o registro do produto FURP-GLICORAD, FDG-18F (2-flúor-2-deoxi-D-glicose-18F), que é amplamente utilizado para diagnóstico em oncologia, neurologia e cardiologia com a utilização de tomografia por emissão de pósitron (PET – Pósitron Emission Tomography).
                     </p>
                     <p>
-
                         E ainda, atualmente produzimos para protocolos de pesquisa o 11C-PIB e o 11C- PK11195, com grande potencial de produzir radiofármacos inéditos no Brasil.
                     </p>
-
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 

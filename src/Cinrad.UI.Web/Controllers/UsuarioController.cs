@@ -1,4 +1,5 @@
 ﻿using Cinrad.Service.ViewModels;
+using Cinrad.UI.Web.Models.AccountViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,7 +15,7 @@ namespace Cinrad.UI.Web.Controllers
 
         [HttpGet]
         public IActionResult Index(bool status = true)
-        {
+        {            
             var users = Service.UsuarioService.ObterTodos();
             ViewBag.Usuarios = users.Where(c => c.IsAtivo == status).ToList();
 
@@ -41,22 +42,26 @@ namespace Cinrad.UI.Web.Controllers
         public IActionResult Perfil(Guid id)
         {
             var user = Service.UsuarioService.ObterPorId(id);
-
+            ViewBag.User = user;
             return View(user);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Editar(UsuarioViewModel usuario, string newpassw, string newpassw2)
+        public IActionResult Editar(UsuarioViewModel usuario, RegisterViewModel register = null, string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                //var result = Service.UsuarioService.Atualizar(usuario);
-                //if (!result)
-                //    ModelState.AddModelError(string.Empty, "Falha ao atualizar cadastro!");
+                var result = Service.UsuarioService.Atualizar(usuario);
+                if (!result)
+                    ModelState.AddModelError(string.Empty, "Falha ao atualizar cadastro!");
             }
 
-            return RedirectToAction(nameof(Perfil), usuario);
+            if(!string.IsNullOrEmpty(returnUrl))
+               return RedirectToAction(nameof(Perfil), usuario);
+
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
@@ -88,8 +93,19 @@ namespace Cinrad.UI.Web.Controllers
 
             ViewBag.Transportadoras = new SelectList(Service.TransportadorService.ObterTodos(), "Id", "RazaoSocial");
             ViewBag.Clientes = new SelectList(Service.ClienteService.ObterTodos(), "Id", "RazaoSocial");
-            //ViewBag.Id = user.Id;
+            
+            return PartialView(user);
+        }
 
+        [HttpGet]
+        public IActionResult PerfilModal(Guid id, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+
+            var user = Service.UsuarioService.ObterPorId(id);
+            if (user == null)
+                return PartialView();           
+           
             return PartialView(user);
         }
 

@@ -6,8 +6,8 @@ namespace Cinrad.UI.Web.Models.AccountViewModels
     {
         [Required]
         [EmailAddress]
-        [Display(Name ="E-mail")]
-        public string Email { get; set; }
+        [Display(Name ="Nome de Usuário")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
