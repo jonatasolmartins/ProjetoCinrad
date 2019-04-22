@@ -12,11 +12,10 @@ namespace Cinrad.Infrastructure.Repository
         public ClienteTransportadoraRepository(CinradContext dbContext) : base(dbContext)
         {
         }
+
         public IEnumerable<Transportadora> Listar(Guid id)
         {
-            var filtro = _cinradContext.ClienteTransportadoras.Where(c => c.ClienteId == id).Select(c => c.Transportadora).AsEnumerable();
-
-            return filtro;
+            return _cinradContext.ClienteTransportadoras.Where(c => c.ClienteId == id).Select(c => c.Transportadora).AsEnumerable();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Cinrad.Infrastructure.Repository;
+using Cinrad.Core.Interface.Repository;
 using Cinrad.Service.Interface;
 
 namespace Cinrad.Service.Services
@@ -8,11 +8,7 @@ namespace Cinrad.Service.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly IUsuarioService _usuarioService;
-        private readonly IClienteService _clienteService;
-        private readonly ITransportadorService _transportadorService;
-        private readonly IClienteTransportadora _clienteTransportadora;
-        private readonly IProdutoService _produtoService;
+
         public Service(
             IUnitOfWork unitOfWork, IMapper mapper, IUsuarioService usuarioService,
             IClienteService clienteService, ITransportadorService transportadorService,
@@ -20,21 +16,21 @@ namespace Cinrad.Service.Services
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _usuarioService = usuarioService;
-            _clienteService = clienteService;
-            _transportadorService = transportadorService;
-            _clienteTransportadora = clienteTransportadora;
-            _produtoService = produtoService;
+            UsuarioService = usuarioService;
+            ClienteService = clienteService;
+            TransportadorService = transportadorService;
+            ClienteTransportadora = clienteTransportadora;
+            ProdutoService = produtoService;
         }
 
-        public IUsuarioService UsuarioService => _usuarioService;
+        public IUsuarioService UsuarioService { get; }
 
-        public IClienteService ClienteService => _clienteService;
+        public IClienteService ClienteService { get; }
 
-        public ITransportadorService TransportadorService => _transportadorService;
+        public ITransportadorService TransportadorService { get; }
 
-        public IClienteTransportadora ClienteTransportadora => _clienteTransportadora;
+        public IClienteTransportadora ClienteTransportadora { get; }
 
-        public IProdutoService ProdutoService => _produtoService;
+        public IProdutoService ProdutoService { get; }
     }
 }

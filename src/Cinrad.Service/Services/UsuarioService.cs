@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Cinrad.Core.Entity;
+using Cinrad.Core.Interface.Repository;
 using Cinrad.Infrastructure.CrossCutting.Identity;
 using Cinrad.Infrastructure.CrossCutting.Identity.Interface;
-using Cinrad.Infrastructure.Repository;
 using Cinrad.Service.Enums;
 using Cinrad.Service.Interface;
 using Cinrad.Service.Validators;

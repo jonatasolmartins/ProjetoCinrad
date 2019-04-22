@@ -12,15 +12,15 @@ namespace Cinrad.Infrastructure.CrossCutting.Ioc
         public static void RegisterServices(IServiceCollection services)
         {
             // Infra - Data 
-
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddTransient<IClienteRepository, ClienteRepository>();
+            services.AddTransient<IClienteTransportadoraRepository, ClienteTransportadoraRepository>();
             services.AddTransient<ITransportadoraRepository, TransportadoraRepository>();
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IIdenityRepository, IdentityRepository>();
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<CinradContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
          
         }
     }

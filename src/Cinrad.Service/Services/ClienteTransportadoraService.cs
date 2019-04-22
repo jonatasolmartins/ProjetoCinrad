@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using Cinrad.Core.Entity;
-using Cinrad.Infrastructure.Repository;
+using Cinrad.Core.Interface.Repository;
 using Cinrad.Service.Interface;
 using Cinrad.Service.ViewModels;
+using System;
+using System.Collections.Generic;
 
 namespace Cinrad.Service.Services
 {

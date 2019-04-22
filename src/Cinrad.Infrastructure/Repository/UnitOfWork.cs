@@ -1,3 +1,4 @@
+using Cinrad.Core.Interface.Repository;
 using Cinrad.Infrastructure.Data;
 using System;
 
@@ -6,56 +7,27 @@ namespace Cinrad.Infrastructure.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private readonly CinradContext _context;
-        private readonly UsuarioRepository _usuarioRepository;
-        private readonly ClienteRepository _clienteRepository;
-        private readonly TransportadoraRepository _transportadoraRepository;
-        private readonly ClienteTransportadoraRepository _clienteTransportadoraRepository;
-        private readonly ProdutoRepository _produtoRepository;
 
-        public UnitOfWork(CinradContext context)
+        public UnitOfWork
+            (CinradContext context, IUsuarioRepository usuarioRepository, IClienteRepository clienteRepository,
+            IClienteTransportadoraRepository clienteTransportadoraRepository, ITransportadoraRepository transportadoraRepository,
+            IProdutoRepository produtoRepository)
         {
             _context = context;
+            UsuarioRepository = usuarioRepository;
+            ClienteRepository = clienteRepository;
+            ClienteTransportadoraRepository = clienteTransportadoraRepository;
+            TransportadoraRepository = transportadoraRepository;
+            ProdutoRepository = produtoRepository;
+            
         }
 
-        public UsuarioRepository UsuarioRepository
-        {
-            get
-            {
-                return _usuarioRepository ?? new UsuarioRepository(_context);
-            }
-        }
+        public IUsuarioRepository UsuarioRepository { get; }
 
-        public ClienteRepository ClienteRepository
-        {
-            get
-            {
-                return _clienteRepository ?? new ClienteRepository(_context);
-            }
-        }
-
-        public TransportadoraRepository TransportadoraRepository
-        {
-            get
-            {
-                return _transportadoraRepository ?? new TransportadoraRepository(_context);
-            }
-        }
-
-        public ClienteTransportadoraRepository ClienteTransportadoraRepository
-        {
-            get
-            {
-                return _clienteTransportadoraRepository ?? new ClienteTransportadoraRepository(_context);
-            }
-        }
-
-        public ProdutoRepository ProdutoRepository
-        {
-            get
-            {
-                return _produtoRepository;
-            }
-        }
+        public IClienteRepository ClienteRepository { get; }
+        public IClienteTransportadoraRepository ClienteTransportadoraRepository { get; }
+        public ITransportadoraRepository TransportadoraRepository { get; }
+        public IProdutoRepository ProdutoRepository { get; }
 
         public int Save()
         {
