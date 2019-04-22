@@ -1,13 +1,15 @@
 ﻿using Cinrad.Service.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace Cinrad.UI.Web.Controllers
 {
+    [Authorize("RequireAdminRole")]
     public class ProdutoController : BaseController
     {
         public IActionResult Index()
-        {
+        {           
             ViewBag.Produtos = Service.ProdutoService.ObterTodos();
             return View();
         }

@@ -43,7 +43,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="products-list ">
+                    <div class="clients-list ">
                         <span class="input-group-btn">
                             <a asp-action="ClienteModal" asp-controller="Produto" class="btn btn-primary" data-target="#modal-form" data-toggle="modal"> Novo</a>
                         </span>
@@ -70,12 +70,12 @@
                             </div>
                         </div>
                         @*<div id="modal-transportadora" class="modal fade">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    @await Html.PartialAsync("ClienteTransportadoraModal");
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        @await Html.PartialAsync("ClienteTransportadoraModal");
+                                    </div>
                                 </div>
-                            </div>
-                        </div>*@
+                            </div>*@
 
                         <div class="table-responsive">
 
@@ -83,25 +83,27 @@
                                 <thead>
                                     <tr>
                                         @*<th>CNPJ</th>
-                                        <th>Razão Social</th>
-                                        <th> Telefone</th>
-                                        <th> Site</th>*@
+                                            <th>Razão Social</th>
+                                            <th> Telefone</th>
+                                            <th> Site</th>*@
                                         <th colspan="4">Açoes</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     @foreach (var produto in ViewBag.Produtos)
                                     {
                                         <tr>
                                             @*<td>@cliente.Cnpj</td>
-                                            <td>@cliente.RazaoSocial</td>
-                                            <td>@cliente.Telefone</td>
-                                            <td>@cliente.Site</td>*@
+                                                <td>@cliente.RazaoSocial</td>
+                                                <td>@cliente.Telefone</td>
+                                                <td>@cliente.Site</td>*@
                                             <td><a asp-action="RemoverModal" asp-controller="Produto" asp-route-id="@produto.Id" data-toggle="modal" data-target="#confirmRemoverModal" title="Remover"><h2> <i class="fa fa-trash"></i></h2></a></td>
                                             <td><a asp-action="EditarModal" asp-controller="Produto" asp-route-id="@produto.Id" data-toggle="modal" data-target="#modal-edit" title="Editar"><h2><i class="fa fa-edit "></i></h2></a></td>
                                             @*<td><a asp-action="ClienteTransportadoraModal" asp-controller="Cliente" asp-route-id="@produto.Id" data-target="#modal-transportadora" data-toggle="modal" title="Associar Transportadora"><h2><i class="fa fa-users "></i></h2></a>*@
                                         </tr>
                                     }
+
                                 </tbody>
                             </table>
 
