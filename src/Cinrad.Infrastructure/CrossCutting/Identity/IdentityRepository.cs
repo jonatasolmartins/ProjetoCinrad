@@ -29,5 +29,10 @@ namespace Cinrad.Infrastructure.CrossCutting.Identity
             return Guid.Empty;
         }
        
+        public async Task<ApplicationUser> GetByName(string name)
+        {
+            var user = await _userManager.FindByNameAsync(name);
+            return user;
+        }
     }
 }
